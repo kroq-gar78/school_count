@@ -34,8 +34,8 @@ public class SchoolCountdown
      * @param args the command line arguments
      */
 
-    public static final GregorianCalendar schoolStart = new GregorianCalendar( 2009 , 7 , 24 , 8 , 30 );
-    public static final GregorianCalendar schoolEnd = new GregorianCalendar( 2010 , 5 , 4 , 12 , 40); //end of school
+    //public static final GregorianCalendar schoolStart = new GregorianCalendar( 2009 , 7 , 24 , 8 , 30 );
+    public static final GregorianCalendar schoolEnd = new GregorianCalendar( 2011 , 5 , 2 , 12 , 40); //end of school
     //public static final long schoolTime = schoolEnd.getTimeInMillis() - schoolStart.getTimeInMillis(); //number of milliseconds between start and end of school
     public static final int longConverter = (int)Math.pow( 2 , 16 );
 
