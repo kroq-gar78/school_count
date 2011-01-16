@@ -129,7 +129,7 @@ public class SchoolCountdown
                     {
                         if( e.getButton() == MouseEvent.BUTTON1 )
                         {
-                            JOptionPane.showMessageDialog( null , statement , "School Countdown Timer notification" , JOptionPane.INFORMATION_MESSAGE );
+                            JOptionPane.showMessageDialog( null , timerDisplay , "School Countdown Timer notification" , JOptionPane.INFORMATION_MESSAGE );
                         }
                     }
 
