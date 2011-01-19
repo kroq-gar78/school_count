@@ -1,0 +1,14 @@
+#!/bin/sh
+
+#Script to compile School Countdown into a JAR file
+#NOTE: Needs JDK to be installed
+
+printf "Compiling School Countdown..."
+javac SchoolCountdown.java
+printf "Finished compiling."
+
+printf "Creating JAR file..."
+jar cfm SchoolCountdown.jar Manifest2.txt *.class schoolCountdown.png help.txt
+chmod +x SchoolCountdown.jar
+printf "Finished creating JAR file."
+printf "To run this program in GNU/Linux, run './SchoolCountdown.jar'"
