@@ -88,7 +88,7 @@ public class SchoolCountdown
         //setup procedure - Tray Icon
         System.out.println( "running..." );
         SystemTray tray = SystemTray.getSystemTray(); //retrieve instance
-        Image img = Toolkit.getDefaultToolkit().getImage( "./schoolCountdown.png" ); //retrieve image
+        Image img = Toolkit.getDefaultToolkit().getImage( "schoolCountdown.png" ); //retrieve image
         ActionListener exitListener = new ActionListener()
         {
             public void actionPerformed( ActionEvent e )
@@ -224,7 +224,7 @@ public class SchoolCountdown
 
                 //System.out.println( days + " , " + hours + " , " + minutes + " , " + seconds );
 
-                Thread.sleep((int) (.5*(1000))); //update every 1/2 second
+                Thread.sleep((int) (1*(1000))); //update every 1 second
             }
             catch (InterruptedException e)
             {
