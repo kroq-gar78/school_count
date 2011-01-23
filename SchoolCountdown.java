@@ -39,20 +39,20 @@ public class SchoolCountdown
     //public static final long schoolTime = schoolEnd.getTimeInMillis() - schoolStart.getTimeInMillis(); //number of milliseconds between start and end of school
     public static final int longConverter = (int)Math.pow( 2 , 16 );
 
-    private static int days = 0;
+    /*private static int days = 0;
     private static int daysRounded = 0;
     private static int hours = 0;
     private static int minutes = 0;
-    private static int seconds = 0;
+    private static int seconds = 0;*/
     private static JPanel timerDisplay;
     private static JPanel helpDisplay;
-    private static JLabel statement = new JLabel();
+    private static JLabel statementEnd = new JLabel();
 
     public static void main(String[] args)
     {
         TrayIcon icon = null;
         GregorianCalendar today = new GregorianCalendar();
-        JLabel timer = new JLabel();
+        //JLabel timer = new JLabel();
         //JProgressBar progress = new JProgressBar( 0 , (int) (1000) ); //divide to fit into int data range
 
         //if after school is over, open popup and close
@@ -80,7 +80,7 @@ public class SchoolCountdown
         timerDisplay = new JPanel();
         //display.add( statement );
         //display.setSize( 300 , 145 );
-        timerDisplay.add( timer );
+        timerDisplay.add( statementEnd );
         //display.add( progress );
         helpDisplay = new JPanel();
 
@@ -174,13 +174,13 @@ public class SchoolCountdown
             try
             {
                 //calculation logic
-                today = new GregorianCalendar(); //update calendar to right now
-                if( today.after( schoolEnd ) ) //if after school is over, open popup and close
+                //today = new GregorianCalendar(); //update calendar to right now
+                if( new GregorianCalendar().after( schoolEnd ) ) //if after school is over, open popup and close
                 {
                     JOptionPane.showMessageDialog( null , "HAPPY SUMMER!!!!!!" , "School Countdown Timer Notification" , JOptionPane.INFORMATION_MESSAGE );
                     System.exit( 0 );
                 }
-                days = 0;
+                //days = 0;
                 long timeBetween = 0;
                 /*//narrow down by month and then calculateto day
                 if( today.get(Calendar.MONTH) != Calendar.JUNE)
@@ -203,22 +203,23 @@ public class SchoolCountdown
                 //calculate to hour*/
 
                 //find millis between today and end of school
-                timeBetween = ( schoolEnd.getTimeInMillis() - today.getTimeInMillis() );
+                /*timeBetween = ( schoolEnd.getTimeInMillis() - today.getTimeInMillis() );
                 days = (int)(timeBetween / (60 * 60 * 24 * 1000L)); //find days
                 timeBetween %= 60 * 60 * 24 * 1000L; //take away amount of days
                 hours = (int) ( timeBetween / ( 60 * 60 * 1000L ) );//find hours
                 timeBetween %= 60 * 60 * 1000L;//take away hours from total
                 minutes = (int) ( timeBetween / ( 60 * 1000L ) );//find minutes
                 timeBetween %= 60 *1000L; //take away total from minutes
-                seconds = (int) ( timeBetween / 1000L ); //find seconds
-                timeBetween %= 1000L; //take away total from seconds
+                seconds = (int) ( timeBetween / 1000L ); //find seconds*/
+                //timeBetween %= 1000L; //take away total from seconds
                 //calculate days rounded value
-                if( hours >= 12 ) daysRounded = days+1;
-                else daysRounded = days;
+                //daysRounded = days;
+                //if( hours > 12 ) daysRounded++;
                 //setStrings or values
-                statement.setText( daysRounded + " days until school is over!" );
-                icon.setToolTip( statement.getText() );
-                timer.setText( days + " days, " + hours + " hours, " + minutes + " minutes,\n and " + seconds + " seconds until school is over!" );
+                //statementEnd.setText( daysRounded + " days until school is over!" );
+                int[] timeLeft = timeLeft( schoolEnd );
+                icon.setToolTip( ( timeLeft[1] > 12 ? timeLeft[0]+1: timeLeft[0] ) + " days until school is over!" ); //do rounding and set tooltip at same time
+                statementEnd.setText( timeLeft[0] + " days, " + timeLeft[1] + " hours, " + timeLeft[2] + " minutes,\n and " + timeLeft[3] + " seconds until school is over!" );
                 //progress.setOrientation( (int) (timeBetween/longConverter ));
                 //progress.setValue( (int) (Math.pow(10, 5) * (timeBetween / schoolTime)));
 
@@ -233,4 +234,18 @@ public class SchoolCountdown
         }
     }
 
+    public static int[] timeLeft( GregorianCalendar date ) //days, hours, minutes, seconds
+    {
+        int[] timeLeft = new int[4];
+        long timeLong = date.getTimeInMillis() - new GregorianCalendar().getTimeInMillis();
+        timeLeft[0] = (int)(timeLong / (60 * 60 * 24 * 1000L)); //find days
+        timeLong %= 60 * 60 * 24 * 1000L; //take away amount of days
+        timeLeft[1] = (int) ( timeLong / ( 60 * 60 * 1000L ) );//find hours
+        timeLong %= 60 * 60 * 1000L;//take away hours from total
+        timeLeft[2] = (int) ( timeLong / ( 60 * 1000L ) );//find minutes
+        timeLong %= 60 *1000L; //take away total from minutes
+        timeLeft[3] = (int) ( timeLong / 1000L ); //find seconds
+
+        return timeLeft;
+    }
 }
