@@ -81,6 +81,7 @@ public class SchoolCountdown
         //progress bar
 
         timerDisplay = new JPanel();
+        timerDisplay.setLayout( new GridLayout(2,1) );
         //display.add( statement );
         //display.setSize( 300 , 145 );
         timerDisplay.add( statementPresday );
