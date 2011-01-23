@@ -4,6 +4,7 @@
  */
 
 import java.awt.AWTException;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.PopupMenu;
 import java.awt.MenuItem;
@@ -36,6 +37,7 @@ public class SchoolCountdown
 
     //public static final GregorianCalendar schoolStart = new GregorianCalendar( 2009 , 7 , 24 , 8 , 30 );
     public static final GregorianCalendar schoolEnd = new GregorianCalendar( 2011 , 5 , 2 , 12 , 40); //end of school
+    public static final GregorianCalendar presday = new GregorianCalendar( 2011 , 1 , 21 , 00 , 00 );
     //public static final long schoolTime = schoolEnd.getTimeInMillis() - schoolStart.getTimeInMillis(); //number of milliseconds between start and end of school
     public static final int longConverter = (int)Math.pow( 2 , 16 );
 
@@ -46,6 +48,7 @@ public class SchoolCountdown
     private static int seconds = 0;*/
     private static JPanel timerDisplay;
     private static JPanel helpDisplay;
+    private static JLabel statementPresday = new JLabel();
     private static JLabel statementEnd = new JLabel();
 
     public static void main(String[] args)
@@ -80,6 +83,7 @@ public class SchoolCountdown
         timerDisplay = new JPanel();
         //display.add( statement );
         //display.setSize( 300 , 145 );
+        timerDisplay.add( statementPresday );
         timerDisplay.add( statementEnd );
         //display.add( progress );
         helpDisplay = new JPanel();
@@ -220,6 +224,9 @@ public class SchoolCountdown
                 int[] timeLeft = timeLeft( schoolEnd );
                 icon.setToolTip( ( timeLeft[1] > 12 ? timeLeft[0]+1: timeLeft[0] ) + " days until school is over!" ); //do rounding and set tooltip at same time
                 statementEnd.setText( timeLeft[0] + " days, " + timeLeft[1] + " hours, " + timeLeft[2] + " minutes,\n and " + timeLeft[3] + " seconds until school is over!" );
+                
+                timeLeft = timeLeft( presday );
+                statementPresday.setText( timeLeft[0] + " days, " + timeLeft[1] + " hours, " + timeLeft[2] + " minutes,\n and " + timeLeft[3] + " seconds until President's Day!" );
                 //progress.setOrientation( (int) (timeBetween/longConverter ));
                 //progress.setValue( (int) (Math.pow(10, 5) * (timeBetween / schoolTime)));
 
