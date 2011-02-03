@@ -16,6 +16,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 //import java.util.Calendar;
 import java.util.GregorianCalendar;
+//import javax.swing.ImageIcon;
 import javax.swing.JLabel; //holds timer for school to end
 import javax.swing.JPanel; //to hold updates in the dialog that pops up from sys-tray
 //import javax.swing.JProgressBar; //to show progress until school is over
@@ -88,7 +89,6 @@ public class SchoolCountdown
         //setup procedure - Tray Icon
         System.out.println( "running..." );
         SystemTray tray = SystemTray.getSystemTray(); //retrieve instance
-        Image img = Toolkit.getDefaultToolkit().getImage( "schoolCountdown.png" ); //retrieve image
         ActionListener exitListener = new ActionListener()
         {
             public void actionPerformed( ActionEvent e )
@@ -119,6 +119,7 @@ public class SchoolCountdown
         menu.addSeparator();
         //menu.add( helpItem );
         menu.add( exitItem );
+        Image img = Toolkit.getDefaultToolkit().getImage("schoolCountdown.gif"); //retrieve image
         icon = new TrayIcon( img , "days until school is over..." , menu ); //instantiate tray icon
         icon.setImageAutoSize( true ); //auto-resize icon for computer
         icon.addMouseListener
@@ -181,7 +182,7 @@ public class SchoolCountdown
                     System.exit( 0 );
                 }
                 //days = 0;
-                long timeBetween = 0;
+                //long timeBetween = 0;
                 /*//narrow down by month and then calculateto day
                 if( today.get(Calendar.MONTH) != Calendar.JUNE)
                 {
