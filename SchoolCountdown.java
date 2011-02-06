@@ -36,8 +36,8 @@ public class SchoolCountdown
      */
 
     //public static final GregorianCalendar schoolStart = new GregorianCalendar( 2009 , 7 , 24 , 8 , 30 );
-    public static final GregorianCalendar schoolEnd = new GregorianCalendar( 2011 , 5 , 2 , 12 , 40); //end of school
-    public static final GregorianCalendar presday = new GregorianCalendar( 2011 , 1 , 21 , 00 , 00 );
+    public static final GregorianCalendar schoolEnd = new GregorianCalendar( 2011 , 5 , 6 , 12 , 40); //end of school
+    public static final GregorianCalendar presday = new GregorianCalendar( 2011 , 1 , 18 , 3 , 30 );
     //public static final long schoolTime = schoolEnd.getTimeInMillis() - schoolStart.getTimeInMillis(); //number of milliseconds between start and end of school
     public static final int longConverter = (int)Math.pow( 2 , 16 );
 
@@ -227,7 +227,7 @@ public class SchoolCountdown
                 statementEnd.setText( timeLeft[0] + " days, " + timeLeft[1] + " hours, " + timeLeft[2] + " minutes,\n and " + timeLeft[3] + " seconds until school is over!" );
                 
                 timeLeft = timeLeft( presday );
-                statementPresday.setText( timeLeft[0] + " days, " + timeLeft[1] + " hours, " + timeLeft[2] + " minutes,\n and " + timeLeft[3] + " seconds until President's Day!" );
+                statementPresday.setText( timeLeft[0] + " days, " + timeLeft[1] + " hours, " + timeLeft[2] + " minutes,\n and " + timeLeft[3] + " seconds until President's Day weekend!" );
                 //progress.setOrientation( (int) (timeBetween/longConverter ));
                 //progress.setValue( (int) (Math.pow(10, 5) * (timeBetween / schoolTime)));
 
