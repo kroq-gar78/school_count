@@ -39,8 +39,10 @@ public class SchoolCountdown
 			}
 			catch( Exception e ) { e.printStackTrace(); }
 			int[] untilClosest = timeRemaining( new GregorianCalendar() , holidays[earliestHoliday] );
-			String endStatement = "Only " + untilClosest[0] + " days, " + untilClosest[1] + " hours, " + untilClosest[2] + " minutes, and " + untilClosest[3] + " seconds until the closest holiday!";
+			int[] unitlSummer = timeRemaining( new GregorianCalendar() , holidays[holidays.length-1] );
+			String endStatement = "Only " + untilClosest[0] + " days, " + untilClosest[1] + " hours, " + untilClosest[2] + " minutes, and " + untilClosest[3] + " seconds until the closest holiday! and\nOnly " + untilSummer[0] + " days, " + untilSummer[1] + " hours, " + untilSummer[2] + " minutes, and " + untilSummer[3] + " seconds until summer break!";
 			System.out.println( endStatement);
+			
 		}
 	}
 	
