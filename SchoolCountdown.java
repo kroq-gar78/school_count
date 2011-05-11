@@ -224,7 +224,7 @@ public class SchoolCountdown
                 //statementEnd.setText( daysRounded + " days until school is over!" );
                 int[] timeLeft = timeLeft( schoolEnd );
                 icon.setToolTip( ( timeLeft[1] > 12 ? timeLeft[0]+1: timeLeft[0] ) + " days until school is over!" ); //do rounding and set tooltip at same time
-                statementEnd.setText( timeLeft[0] + " days, " + timeLeft[1] + " hours, " + timeLeft[2] + " minutes,\n and " + timeLeft[3] + " seconds until school is over!" );
+                statementEnd.setText( timeLeft[0] + " days, " + timeLeft[1] + " hours, " + timeLeft[2] + " minutes,\n and " + timeLeft[3] + " seconds until school is over!" ); //create string
                 
                 timeLeft = timeLeft( presday );
                 statementPresday.setText( timeLeft[0] + " days, " + timeLeft[1] + " hours, " + timeLeft[2] + " minutes,\n and " + timeLeft[3] + " seconds until President's Day weekend!" );
