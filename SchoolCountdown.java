@@ -236,9 +236,8 @@ public class SchoolCountdown
 
                 int[] untilClosest = timeRemaining( new GregorianCalendar() , holidays[earliestHoliday] );
                 int[] untilSummer = timeRemaining( new GregorianCalendar() , holidays[holidays.length-1] );
-                System.out.println( endStatement);
                 statementClosest.setText( "Only " + untilClosest[0] + " days, " + untilClosest[1] + " hours, " + untilClosest[2] + " minutes, and " + untilClosest[3] + " seconds until the closest holiday! and" );
-                statementEnd.setText( "Only " + untilSummer[0] + " days, " + untilSummer[1] + " hours, " + untilSummer[2] + " minutes, and " + untilSummer[3] + " seconds until summer break!" )
+                statementEnd.setText( "Only " + untilSummer[0] + " days, " + untilSummer[1] + " hours, " + untilSummer[2] + " minutes, and " + untilSummer[3] + " seconds until summer break!" );
 
                 //progress.setOrientation( (int) (timeBetween/longConverter ));
                 //progress.setValue( (int) (Math.pow(10, 5) * (timeBetween / schoolTime)));
