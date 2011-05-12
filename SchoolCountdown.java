@@ -1,3 +1,4 @@
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -15,20 +16,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-//import java.util.Calendar;
-import java.util.GregorianCalendar;
-import javax.swing.JLabel; //holds timer for school to end
-import javax.swing.JPanel; //to hold updates in the dialog that pops up from sys-tray
-//import javax.swing.JProgressBar; //to show progress until school is over
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-//import javax.imageio.ImageIO;
-//import java.io.IOException;
-
+import javax.swing.JPanel;
+import java.util.GregorianCalendar;
 
 /**
- *
- * @author kroq-gar78 <java-apps@vaidya.info>
+ * @version 2.0
  */
+
 public class SchoolCountdown
 {
     /**
@@ -36,8 +32,6 @@ public class SchoolCountdown
      */
 
     //public static final GregorianCalendar schoolStart = new GregorianCalendar( 2009 , 7 , 24 , 8 , 30 );
-    public static final GregorianCalendar schoolEnd = new GregorianCalendar( 2011 , 5 , 6 , 12 , 40); //end of school
-    public static final GregorianCalendar presday = new GregorianCalendar( 2011 , 1 , 18 , 3 , 30 );
     //public static final long schoolTime = schoolEnd.getTimeInMillis() - schoolStart.getTimeInMillis(); //number of milliseconds between start and end of school
     public static final int longConverter = (int)Math.pow( 2 , 16 );
 
@@ -48,8 +42,14 @@ public class SchoolCountdown
     private static int seconds = 0;*/
     private static JPanel timerDisplay;
     private static JPanel helpDisplay;
-    private static JLabel statementPresday = new JLabel();
     private static JLabel statementEnd = new JLabel();
+    private static JLabel statementClosest = new JLabel();
+    public static final long millisToSec = (long)Math.pow( 10 , 3 );
+    public static final int hour_sec = 60*60; //num of seconds in an hour
+    public static final GregorianCalendar schoolEnd = new GregorianCalendar( 2011, 5 , 6 , 12 , 40 ); //June 6, 2011, 12:40 P.M.
+    public static final GregorianCalendar aprilHoliday = new GregorianCalendar( 2011, 3 , 21 , 3 , 30 ); //April 22, 2011 Holiday, weekend start April 22, 2011, 3:30 P.M.
+    public static final GregorianCalendar mayHoliday = new GregorianCalendar( 2011, 4, 27, 3, 30 ); //May 30, 2011 Holiday, weekend start May 27, 2011, 3:30 P.M.
+    public static final GregorianCalendar springBreak = new GregorianCalendar( 2011, 2, 11, 3, 30 ); //spring break; though program written after start of (during) Spring Break; only for testing purposes
 
     public static void main(String[] args)
     {
@@ -57,16 +57,26 @@ public class SchoolCountdown
         GregorianCalendar today = new GregorianCalendar();
         //JLabel timer = new JLabel();
         //JProgressBar progress = new JProgressBar( 0 , (int) (1000) ); //divide to fit into int data range
-
+        GregorianCalendar[] holidays = { schoolEnd , aprilHoliday, mayHoliday, springBreak };
+        //sorts in chronological order
+        java.util.Arrays.sort( holidays );
+        //System.out.println( holidays[0] );
+        //check when the closest one is (not passed already)
+        int earliestHoliday = holidays.length-1; //"iSave"; index of earliest hliday still to come in array "holidays"; if for loop somehow fails, default to summer
+        for(int i = 0; i < holidays.length; i++ )
+        {
+                if( holidays[i].after(new GregorianCalendar()) )
+                {
+                        earliestHoliday = i;
+                        break;
+                }
+        }
         //if after school is over, open popup and close
         if( today.after( schoolEnd ) )
         {
             JOptionPane.showMessageDialog( null , "HAPPY SUMMER!!!!!!" , "School Countdown Timer Notification" , JOptionPane.INFORMATION_MESSAGE );
             System.exit( 0 );
         }
-
-        //int days = 0;
-
         //exit if the system tray isn't supported
         if( !SystemTray.isSupported() )
         {
@@ -84,7 +94,7 @@ public class SchoolCountdown
         timerDisplay.setLayout( new GridLayout(2,1) );
         //display.add( statement );
         //display.setSize( 300 , 145 );
-        timerDisplay.add( statementPresday );
+        timerDisplay.add( statementClosest );
         timerDisplay.add( statementEnd );
         //display.add( progress );
         helpDisplay = new JPanel();
@@ -186,7 +196,6 @@ public class SchoolCountdown
                     System.exit( 0 );
                 }
                 //days = 0;
-                long timeBetween = 0;
                 /*//narrow down by month and then calculateto day
                 if( today.get(Calendar.MONTH) != Calendar.JUNE)
                 {
@@ -222,12 +231,15 @@ public class SchoolCountdown
                 //if( hours > 12 ) daysRounded++;
                 //setStrings or values
                 //statementEnd.setText( daysRounded + " days until school is over!" );
-                int[] timeLeft = timeLeft( schoolEnd );
-                icon.setToolTip( ( timeLeft[1] > 12 ? timeLeft[0]+1: timeLeft[0] ) + " days until school is over!" ); //do rounding and set tooltip at same time
-                statementEnd.setText( timeLeft[0] + " days, " + timeLeft[1] + " hours, " + timeLeft[2] + " minutes,\n and " + timeLeft[3] + " seconds until school is over!" ); //create string
-                
-                timeLeft = timeLeft( presday );
-                statementPresday.setText( timeLeft[0] + " days, " + timeLeft[1] + " hours, " + timeLeft[2] + " minutes,\n and " + timeLeft[3] + " seconds until President's Day weekend!" );
+
+
+
+                int[] untilClosest = timeRemaining( new GregorianCalendar() , holidays[earliestHoliday] );
+                int[] untilSummer = timeRemaining( new GregorianCalendar() , holidays[holidays.length-1] );
+                System.out.println( endStatement);
+                statementClosest.setText( "Only " + untilClosest[0] + " days, " + untilClosest[1] + " hours, " + untilClosest[2] + " minutes, and " + untilClosest[3] + " seconds until the closest holiday! and" );
+                statementEnd.setText( "Only " + untilSummer[0] + " days, " + untilSummer[1] + " hours, " + untilSummer[2] + " minutes, and " + untilSummer[3] + " seconds until summer break!" )
+
                 //progress.setOrientation( (int) (timeBetween/longConverter ));
                 //progress.setValue( (int) (Math.pow(10, 5) * (timeBetween / schoolTime)));
 
@@ -255,5 +267,26 @@ public class SchoolCountdown
         timeLeft[3] = (int) ( timeLong / 1000L ); //find seconds
 
         return timeLeft;
+    }
+	
+	
+    
+
+    public static int[] timeRemaining( GregorianCalendar start , GregorianCalendar end )
+    {
+            int[] remainingVals = new int[4]; //days, hours, minutes, seconds; array to return
+            //weeks?
+
+            int seconds = (int)((end.getTimeInMillis() - start.getTimeInMillis())/millisToSec); //seconds remaining
+
+            remainingVals[0] = seconds/(24*hour_sec); //days
+            seconds %= (24*hour_sec);
+            remainingVals[1] = seconds/hour_sec; //hours
+            seconds %= hour_sec;
+            remainingVals[2] = seconds/60; //minutes
+            seconds %= 60;
+            remainingVals[3] = seconds; //seconds
+
+            return remainingVals;
     }
 }
