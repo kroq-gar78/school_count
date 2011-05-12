@@ -103,7 +103,7 @@ public class SchoolCountdown
         //setup procedure - Tray Icon
         System.out.println( "running..." );
         SystemTray tray = SystemTray.getSystemTray(); //retrieve instance
-        Image img = Toolkit.getDefaultToolkit().getImage( "schoolCountdown.png" ); //retrieve image
+        Image img = Toolkit.getDefaultToolkit().getImage( "schoolCountdown.gif" ); //retrieve image
         ActionListener exitListener = new ActionListener()
         {
             public void actionPerformed( ActionEvent e )
