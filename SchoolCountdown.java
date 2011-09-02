@@ -16,10 +16,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.URL;
+import java.util.GregorianCalendar;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import java.util.GregorianCalendar;
 
 /**
  * @version 2.0
@@ -40,13 +41,14 @@ public class SchoolCountdown
     private static int hours = 0;
     private static int minutes = 0;
     private static int seconds = 0;*/
+    public static final String iconName = "schoolCountdown.gif";
     private static JPanel timerDisplay;
     private static JPanel helpDisplay;
     private static JLabel statementEnd = new JLabel();
     private static JLabel statementClosest = new JLabel();
     public static final long millisToSec = (long)Math.pow( 10 , 3 );
     public static final int hour_sec = 60*60; //num of seconds in an hour
-    public static final GregorianCalendar schoolEnd = new GregorianCalendar( 2011, 5 , 6 , 12 , 40 ); //June 6, 2011, 12:40 P.M.
+    public static final GregorianCalendar schoolEnd = new GregorianCalendar( 2012, 5 , 6 , 12 , 40 ); //June 6, 2011, 12:40 P.M.
     public static final GregorianCalendar aprilHoliday = new GregorianCalendar( 2011, 3 , 21 , 3 , 30 ); //April 22, 2011 Holiday, weekend start April 22, 2011, 3:30 P.M.
     public static final GregorianCalendar mayHoliday = new GregorianCalendar( 2011, 4, 27, 3, 30 ); //May 30, 2011 Holiday, weekend start May 27, 2011, 3:30 P.M.
     public static final GregorianCalendar springBreak = new GregorianCalendar( 2011, 2, 11, 3, 30 ); //spring break; though program written after start of (during) Spring Break; only for testing purposes
@@ -62,7 +64,7 @@ public class SchoolCountdown
         java.util.Arrays.sort( holidays );
         //System.out.println( holidays[0] );
         //check when the closest one is (not passed already)
-        int earliestHoliday = holidays.length-1; //"iSave"; index of earliest hliday still to come in array "holidays"; if for loop somehow fails, default to summer
+        int earliestHoliday = holidays.length-1; //"iSave"; index of earliest holiday still to come in array "holidays"; if for loop somehow fails, default to summer
         for(int i = 0; i < holidays.length; i++ )
         {
                 if( holidays[i].after(new GregorianCalendar()) )
@@ -103,7 +105,23 @@ public class SchoolCountdown
         //setup procedure - Tray Icon
         System.out.println( "running..." );
         SystemTray tray = SystemTray.getSystemTray(); //retrieve instance
-        Image img = Toolkit.getDefaultToolkit().getImage( "schoolCountdown.gif" ); //retrieve image
+        //File imgPath;
+        Image img;
+        //System.out.println(runningFromJAR());
+        if( runningFromJAR() )
+        {
+			URL imgURL = new SchoolCountdown().getClass().getResource(iconName);
+			img = Toolkit.getDefaultToolkit().getImage(imgURL);
+		}
+		else
+		{
+			String baseDir = new SchoolCountdown().getClass().getProtectionDomain().getCodeSource().getLocation().toString().substring(5);
+			String imgPath = baseDir + System.getProperty("file.separator") + iconName;
+			//System.out.println(imgPath);
+			
+			img = Toolkit.getDefaultToolkit().getImage(imgPath);
+		}
+         //retrieve image
         ActionListener exitListener = new ActionListener()
         {
             public void actionPerformed( ActionEvent e )
@@ -268,10 +286,7 @@ public class SchoolCountdown
 
         return timeLeft;
     }
-	
-	
     
-
     public static int[] timeRemaining( GregorianCalendar start , GregorianCalendar end )
     {
             int[] remainingVals = new int[4]; //days, hours, minutes, seconds; array to return
@@ -289,4 +304,12 @@ public class SchoolCountdown
 
             return remainingVals;
     }
+    
+    public static boolean runningFromJAR()
+    {
+		String className = new SchoolCountdown().getClass().getName().replace('.','/');
+		String classJar = new SchoolCountdown().getClass().getResource("/"+className+".class").toString();
+		if( classJar.startsWith("jar:") ) return true;
+		return false;
+	}
 }
