@@ -24,6 +24,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 /**
  * @author Aditya Vaidya <kroq.gar78@gmail.com>
@@ -45,7 +46,7 @@ public class SchoolCountdown
     private static int hours = 0;
     private static int minutes = 0;
     private static int seconds = 0;*/
-    public static final String iconName = "schoolCountdown.png";
+    public static final String iconName = "schoolCountdown.gif";
     private static JPanel timerDisplay;
     private static JPanel helpDisplay;
     private static JLabel statementEnd = new JLabel();
@@ -114,8 +115,20 @@ public class SchoolCountdown
         timerDisplay.add( statementEnd );
         //display.add( progress );
         helpDisplay = new JPanel();
-
-
+		
+		//set look and feel to system for better "implementation"
+		try
+		{
+			UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
+			//UIManager.setLookAndFeel( "com.sun.java.swing.plaf.windows.WindowsLookAndFeel" );
+			System.out.println( UIManager.getSystemLookAndFeelClassName() );
+		}
+		catch( Exception e )
+		{
+			System.err.println( "Failed to retrieve system look and feel. Falling back to default look and feel.\n" );
+			e.printStackTrace();
+			JOptionPane.showMessageDialog( null , "School Countdown Timer failed to retrieve the system look and feel. Falling back to default look and feel." , "Warning" , JOptionPane.WARNING_MESSAGE );
+		}
         //setup procedure - Tray Icon
         System.out.println( "running..." );
         SystemTray tray = SystemTray.getSystemTray(); //retrieve instance
@@ -126,7 +139,6 @@ public class SchoolCountdown
         
         /*//depending on where the program is being run from (in/out of JAR), load differently*/
         // ^^^ ignore the above comment...
-        
         try
         {
 			/*if( runningFromJAR() )
@@ -284,8 +296,9 @@ public class SchoolCountdown
                 int[] untilSummer = timeRemaining( new GregorianCalendar() , holidays[holidays.length-1] );
                 statementClosest.setText( "Only " + untilClosest[0] + " days, " + untilClosest[1] + " hours, " + untilClosest[2] + " minutes, and " + untilClosest[3] + " seconds until the closest holiday! and" );
                 statementEnd.setText( "Only " + untilSummer[0] + " days, " + untilSummer[1] + " hours, " + untilSummer[2] + " minutes, and " + untilSummer[3] + " seconds until summer break!" );
-                icon.setToolTip( ( untilSummer[1] > 12 ? untilSummer[0]+1: untilSummer[0] ) + " days until school is over!" ); //do rounding and set tooltip at same time
-
+                //icon.setToolTip( ( untilSummer[1] > 12 ? untilSummer[0]+1: untilSummer[0] ) + " days until school is over!" ); //do rounding and set tooltip at same time
+				icon.setToolTip( (untilSummer[0] <= 90 ? (( untilSummer[1] > 12 ? untilSummer[0]+1: untilSummer[0] ) + " days until school is over!" ) : 
+					(( untilClosest[1] > 12 ? untilClosest[0]+1: untilClosest[0]) + " days until the closest holiday!" )  ) ); //do rounding, choose which day to count to, and set tooltip at same time!
                 //progress.setOrientation( (int) (timeBetween/longConverter ));
                 //progress.setValue( (int) (Math.pow(10, 5) * (timeBetween / schoolTime)));
 
