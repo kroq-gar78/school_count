@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
+ * @author Aditya Vaidya <kroq.gar78@gmail.com>
  * @version 2.0
  */
 
@@ -117,22 +118,33 @@ public class SchoolCountdown
         System.out.println( "running..." );
         SystemTray tray = SystemTray.getSystemTray(); //retrieve instance
         //File imgPath;
-        Image img;
+        Image img = null;
+        URL imgURL = null;
         //System.out.println(runningFromJAR());
-        if( runningFromJAR() )
+        
+        //depending on where the program is being run from (in/out of JAR), load differently
+        try
         {
-			URL imgURL = new SchoolCountdown().getClass().getResource(iconName);
+			if( runningFromJAR() )
+			{
+				imgURL = new SchoolCountdown().getClass().getResource(iconName);
+			}
+			else
+			{
+				URL baseDir = new SchoolCountdown().getClass().getProtectionDomain().getCodeSource().getLocation();
+				imgURL = new URL( baseDir.toString() + System.getProperty("file.separator") + iconName );
+				//System.out.println(imgPath);
+			}
 			img = Toolkit.getDefaultToolkit().getImage(imgURL);
 		}
-		else
+		catch( Exception e ) //usually MalformedURLException
 		{
-			String baseDir = new SchoolCountdown().getClass().getProtectionDomain().getCodeSource().getLocation().toString().substring(5);
-			String imgPath = baseDir + System.getProperty("file.separator") + iconName;
-			//System.out.println(imgPath);
-			
-			img = Toolkit.getDefaultToolkit().getImage(imgPath);
+			e.printStackTrace();
+			JOptionPane.showMessageDialog( null , "School Countdown Timer encountered an error while trying to load the icon. Terminating now." , "Error" , JOptionPane.ERROR_MESSAGE );
+			System.err.println( "Error loading Icon. Now exiting..." );
+			System.exit(1); //exit with error code
 		}
-         //retrieve image
+		
         ActionListener exitListener = new ActionListener()
         {
             public void actionPerformed( ActionEvent e )
