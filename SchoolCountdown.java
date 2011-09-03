@@ -16,9 +16,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -43,7 +45,7 @@ public class SchoolCountdown
     private static int hours = 0;
     private static int minutes = 0;
     private static int seconds = 0;*/
-    public static final String iconName = "schoolCountdown.gif";
+    public static final String iconName = "schoolCountdown.png";
     private static JPanel timerDisplay;
     private static JPanel helpDisplay;
     private static JLabel statementEnd = new JLabel();
@@ -118,29 +120,33 @@ public class SchoolCountdown
         System.out.println( "running..." );
         SystemTray tray = SystemTray.getSystemTray(); //retrieve instance
         //File imgPath;
-        Image img = null;
+        BufferedImage img = null;
         URL imgURL = null;
         //System.out.println(runningFromJAR());
         
-        //depending on where the program is being run from (in/out of JAR), load differently
+        /*//depending on where the program is being run from (in/out of JAR), load differently*/
+        // ^^^ ignore the above comment...
+        
         try
         {
-			if( runningFromJAR() )
+			/*if( runningFromJAR() )
 			{
 				imgURL = new SchoolCountdown().getClass().getResource(iconName);
 			}
 			else
 			{
 				URL baseDir = new SchoolCountdown().getClass().getProtectionDomain().getCodeSource().getLocation();
-				imgURL = new URL( baseDir.toString() + System.getProperty("file.separator") + iconName );
+				//imgURL = new URL( baseDir.toString() + System.getProperty("file.separator") + iconName );
+				imgURL = new SchoolCountdown().getClass().getResource(iconName);
 				//System.out.println(imgPath);
-			}
-			img = Toolkit.getDefaultToolkit().getImage(imgURL);
+			}*/
+			imgURL = new SchoolCountdown().getClass().getResource(iconName);
+			img = ImageIO.read(imgURL);
 		}
 		catch( Exception e ) //usually MalformedURLException
 		{
 			e.printStackTrace();
-			JOptionPane.showMessageDialog( null , "School Countdown Timer encountered an error while trying to load the icon. Terminating now." , "Error" , JOptionPane.ERROR_MESSAGE );
+			JOptionPane.showMessageDialog( null , "School Countdown Timer encountered an error while\ntrying to load the icon. Terminating now." , "Error" , JOptionPane.ERROR_MESSAGE );
 			System.err.println( "Error loading Icon. Now exiting..." );
 			System.exit(1); //exit with error code
 		}
@@ -229,7 +235,6 @@ public class SchoolCountdown
         {
             try
             {
-                //calculation logic
                 //today = new GregorianCalendar(); //update calendar to right now
                 if( new GregorianCalendar().after( schoolEnd ) ) //if after school is over, open popup and close
                 {
