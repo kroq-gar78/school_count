@@ -1,5 +1,4 @@
 #!/bin/sh
-
 # This script will compile SchoolCountdown into .class files and then run it.
 
 printf "Compiling SchoolCountdown... "
