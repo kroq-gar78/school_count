@@ -1,6 +1,0 @@
-#!/bin/sh
-
-#run the jar file (w/ icon)
-
-printf "Running SchoolCountdown.jar..."
-java -jar ./SchoolCountdown.jar
