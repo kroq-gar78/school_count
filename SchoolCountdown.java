@@ -63,7 +63,7 @@ public class SchoolCountdown
     public static final GregorianCalendar memorialDay = new GregorianCalendar( 2012 , Calendar.MAY , 25 , 3 , 30 ); //May 28, 2012; weekend starts May 28, 2011, 3:30 P.M.
     public static final GregorianCalendar schoolEnd = new GregorianCalendar( 2012 , Calendar.JUNE , 1 , 12 , 40 ); //END OF SCHOOL!!!!! June 1, 2012, 3:30 P.M.*/
     
-    static class Holiday
+    static class Holiday implements Comparable<Holiday>
 	{
 		public Holiday( GregorianCalendar date , String name )
 		{
@@ -71,12 +71,31 @@ public class SchoolCountdown
 			this.name = name;
 		}
 		
-		public GregorianCalendar date = null;
-		public String name = "";
+		public boolean equals( Object o )
+		{
+			if(!(o instanceof Holiday ) )
+			{
+				return false;
+			}
+			Holiday h = (Holiday)o;
+			return (h.date==this.date)&&(h.name==this.name);
+		}
+		public int compareTo( Holiday o )
+		{
+			return ( this.date.after(o.date) ? 1:-1 );
+		}
+		public int compareTo( GregorianCalendar o )
+		{
+			return ( this.date.after(o) ? 1:-1 );
+		}
+		
+		public GregorianCalendar date;
+		public String name;
 	}
 	
     //public static Holiday laborDay, schoolEnd = new Holiday();
     public static Holiday laborDay = new Holiday( new GregorianCalendar( 2011, Calendar.SEPTEMBER , 2 , 3 , 30 ) , "Labor Day" );
+    public static Holiday thanksgivingBreak = new Holiday( new GregorianCalendar( 2011, Calendar.NOVEMBER , 22 , 3 , 30 ) , "Thanksgiving Break" );
     public static Holiday schoolEnd = new Holiday( new GregorianCalendar( 2012 , Calendar.JUNE , 1 , 12 , 40 ) , "summer break" );
     
     /*public static final GregorianCalendar schoolEnd = new GregorianCalendar( 2012, 5 , 6 , 12 , 40 ); //June 6, 2011, 12:40 P.M.
@@ -91,20 +110,25 @@ public class SchoolCountdown
         GregorianCalendar today = new GregorianCalendar();
         //JLabel timer = new JLabel();
         //JProgressBar progress = new JProgressBar( 0 , (int) (1000) ); //divide to fit into int data range
-        Holiday[] holidays = { laborDay , schoolEnd };
+        Holiday[] holidays = { laborDay , schoolEnd, thanksgivingBreak };
         //sorts in chronological order
-        /*java.util.Arrays.sort( holidays );
+        java.util.Arrays.sort( holidays );
         //System.out.println( holidays[0] );
         //check when the closest one is (not passed already)
         int earliestHoliday = holidays.length-1; //"iSave"; index of earliest holiday still to come in array "holidays"; if for loop somehow fails, default to summer
         for(int i = 0; i < holidays.length; i++ )
         {
-                if( holidays[i].after(new GregorianCalendar()) )
+                if( holidays[i].compareTo(new GregorianCalendar()) == 1 )
                 {
                         earliestHoliday = i;
                         break;
                 }
-        }*/
+        }
+        //print array for confirmation
+        /*for( int i = 0; i < holidays.length; i++ )
+        {
+			System.out.println( holidays[i].name );
+		}*/
         //if after school is over, open popup and close
         if( today.after( schoolEnd.date ) )
         {
@@ -309,7 +333,7 @@ public class SchoolCountdown
 
 
 
-                int[] untilClosest = timeRemaining( new GregorianCalendar() , holidays[0].date );
+                int[] untilClosest = timeRemaining( new GregorianCalendar() , holidays[earliestHoliday].date );
                 int[] untilSummer = timeRemaining( new GregorianCalendar() , holidays[holidays.length-1].date );
                 statementClosest.setText( "Only " + untilClosest[0] + " days, " + untilClosest[1] + " hours, " + untilClosest[2] + " minutes, and " + untilClosest[3] + " seconds until " + holidays[0].name + " and" );
                 statementEnd.setText( "Only " + untilSummer[0] + " days, " + untilSummer[1] + " hours, " + untilSummer[2] + " minutes, and " + untilSummer[3] + " seconds until " + holidays[1].name + "!" );
