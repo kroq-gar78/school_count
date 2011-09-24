@@ -52,16 +52,6 @@ public class SchoolCountdown
     private static JLabel statementClosest = new JLabel();
     public static final long millisToSec = (long)Math.pow( 10 , 3 );
     public static final int hour_sec = 60*60; //num of seconds in an hour
-    /*public static final GregorianCalendar laborDay = new GregorianCalendar( 2011, Calendar.SEPTEMBER , 2 , 3 , 30 ); //September 5, 2011 holiday, weekend starts September 2, 2011, 3:30 P.M.
-    public static final GregorianCalendar fallHoliday = new GregorianCalendar( 2011, Calendar.OCTOBER , 20 , 3 , 30 ); //October 21 and 24, 2011 holidays, weekend starts October 20, 2011, 3:30 P.M.
-    public static final GregorianCalendar thanksgivingBreak = new GregorianCalendar( 2011, Calendar.NOVEMBER , 22 , 3 , 30 ); //Thanksgiving 2011; holiday starts November 22, 2011, 3:30 P.M.
-    public static final GregorianCalendar winterBreak = new GregorianCalendar( 2011, Calendar.DECEMBER , 18 , 12 , 40 ); //December 19, 2011; weekend starts December 18, 2011, 12:40 P.M.
-    public static final GregorianCalendar mlkDay = new GregorianCalendar( 2012 , Calendar.JANUARY , 13 , 3 , 30 ); //January 16, 2012; weekend starts January 13, 2012, 3:30 P.M.
-    public static final GregorianCalendar presDay = new GregorianCalendar( 2012 , Calendar.FEBRUARY , 17 , 3 , 30 ); //February 20, 2012; weekend starts February 17, 2012, 3:30 P.M.
-    public static final GregorianCalendar springBreak = new GregorianCalendar( 2012 , Calendar.MARCH , 9 , 3 , 30 ); //Spring Break 2012; officially starts March 12, 2012; weekend starts March 9, 2012, 3:30 P.M.
-    public static final GregorianCalendar springHoliday = new GregorianCalendar( 2012 , Calendar.APRIL , 5 , 3 , 30); //April 6, 2012; weekend starts April 5, 2012, 3:30 P.M.
-    public static final GregorianCalendar memorialDay = new GregorianCalendar( 2012 , Calendar.MAY , 25 , 3 , 30 ); //May 28, 2012; weekend starts May 28, 2011, 3:30 P.M.
-    public static final GregorianCalendar schoolEnd = new GregorianCalendar( 2012 , Calendar.JUNE , 1 , 12 , 40 ); //END OF SCHOOL!!!!! June 1, 2012, 3:30 P.M.*/
     
     static class Holiday implements Comparable<Holiday>
 	{
@@ -95,8 +85,28 @@ public class SchoolCountdown
 	
     //public static Holiday laborDay, schoolEnd = new Holiday();
     public static Holiday laborDay = new Holiday( new GregorianCalendar( 2011, Calendar.SEPTEMBER , 2 , 3 , 30 ) , "Labor Day" );
-    public static Holiday thanksgivingBreak = new Holiday( new GregorianCalendar( 2011, Calendar.NOVEMBER , 22 , 3 , 30 ) , "Thanksgiving Break" );
-    public static Holiday schoolEnd = new Holiday( new GregorianCalendar( 2012 , Calendar.JUNE , 1 , 12 , 40 ) , "summer break" );
+    public static Holiday fallHoliday = new Holiday( new GregorianCalendar( 2011, Calendar.OCTOBER , 20 , 3 , 30 ) , "the Fall holiday" ); //October 21 and 24, 2011 holidays, weekend starts October 20, 2011, 3:30 P.M.
+    public static Holiday thanksgivingBreak = new Holiday( new GregorianCalendar( 2011, Calendar.NOVEMBER , 22 , 3 , 30 ) , "Thanksgiving Break" ); //Thanksgiving 2011; holiday starts November 22, 2011, 3:30 P.M.
+    public static Holiday winterBreak = new Holiday( new GregorianCalendar( 2011, Calendar.DECEMBER , 18 , 12 , 40 ) , "Winter break" );
+    public static Holiday mlkDay = new Holiday( new GregorianCalendar( 2012 , Calendar.JANUARY , 13 , 3 , 30 ) , "MLK Day" );
+    public static Holiday presDay = new Holiday( new GregorianCalendar( 2012 , Calendar.FEBRUARY , 17 , 3 , 30 ) , "President's Day" );
+    public static Holiday springBreak = new Holiday( new GregorianCalendar( 2012 , Calendar.MARCH , 9 , 3 , 30 ) , "Spring Break" );
+    public static Holiday springHoliday = new Holiday( new GregorianCalendar( 2012 , Calendar.APRIL , 5 , 3 , 30) , "the Spring holiday" );
+    public static Holiday memorialDay = new Holiday( new GregorianCalendar( 2012 , Calendar.MAY , 25 , 3 , 30 ) , "Memorial Day" );
+    public static Holiday schoolEnd = new Holiday( new GregorianCalendar( 2012 , Calendar.JUNE , 1 , 12 , 40 ) , "Summer break" );
+    
+    
+    /*public static final GregorianCalendar laborDay = new GregorianCalendar( 2011, Calendar.SEPTEMBER , 2 , 3 , 30 ); //September 5, 2011 holiday, weekend starts September 2, 2011, 3:30 P.M.
+    public static final GregorianCalendar fallHoliday = new GregorianCalendar( 2011, Calendar.OCTOBER , 20 , 3 , 30 ); //October 21 and 24, 2011 holidays, weekend starts October 20, 2011, 3:30 P.M.
+    public static final GregorianCalendar thanksgivingBreak = new GregorianCalendar( 2011, Calendar.NOVEMBER , 22 , 3 , 30 ); //Thanksgiving 2011; holiday starts November 22, 2011, 3:30 P.M.
+    public static final GregorianCalendar winterBreak = new GregorianCalendar( 2011, Calendar.DECEMBER , 18 , 12 , 40 ); //December 19, 2011; weekend starts December 18, 2011, 12:40 P.M.
+    public static final GregorianCalendar mlkDay = new GregorianCalendar( 2012 , Calendar.JANUARY , 13 , 3 , 30 ); //January 16, 2012; weekend starts January 13, 2012, 3:30 P.M.
+    public static final GregorianCalendar presDay = new GregorianCalendar( 2012 , Calendar.FEBRUARY , 17 , 3 , 30 ); //February 20, 2012; weekend starts February 17, 2012, 3:30 P.M.
+    public static final GregorianCalendar springBreak = new GregorianCalendar( 2012 , Calendar.MARCH , 9 , 3 , 30 ); //Spring Break 2012; officially starts March 12, 2012; weekend starts March 9, 2012, 3:30 P.M.
+    public static final GregorianCalendar springHoliday = new GregorianCalendar( 2012 , Calendar.APRIL , 5 , 3 , 30); //April 6, 2012; weekend starts April 5, 2012, 3:30 P.M.
+    public static final GregorianCalendar memorialDay = new GregorianCalendar( 2012 , Calendar.MAY , 25 , 3 , 30 ); //May 28, 2012; weekend starts May 28, 2011, 3:30 P.M.
+    public static final GregorianCalendar schoolEnd = new GregorianCalendar( 2012 , Calendar.JUNE , 1 , 12 , 40 ); //END OF SCHOOL!!!!! June 1, 2012, 3:30 P.M.*/
+    
     
     /*public static final GregorianCalendar schoolEnd = new GregorianCalendar( 2012, 5 , 6 , 12 , 40 ); //June 6, 2011, 12:40 P.M.
     public static final GregorianCalendar aprilHoliday = new GregorianCalendar( 2011, 3 , 21 , 3 , 30 ); //April 22, 2011 Holiday, weekend start April 22, 2011, 3:30 P.M.
@@ -110,7 +120,7 @@ public class SchoolCountdown
         GregorianCalendar today = new GregorianCalendar();
         //JLabel timer = new JLabel();
         //JProgressBar progress = new JProgressBar( 0 , (int) (1000) ); //divide to fit into int data range
-        Holiday[] holidays = { laborDay , schoolEnd, thanksgivingBreak };
+        Holiday[] holidays = { laborDay , fallHoliday , thanksgivingBreak , winterBreak , mlkDay , presDay , springBreak , springHoliday , memorialDay , schoolEnd };
         //sorts in chronological order
         java.util.Arrays.sort( holidays );
         //System.out.println( holidays[0] );
