@@ -252,6 +252,10 @@ public class SchoolCountdown
                     JOptionPane.showMessageDialog( null , "HAPPY SUMMER!!!!!!" , "School Countdown Timer Notification" , JOptionPane.INFORMATION_MESSAGE );
                     System.exit( 0 );
                 }
+                while( new GregorianCalendar().after( holidays[earliestHoliday].date ) )
+                {
+					earliestHoliday++;
+				}
                 
                 int[] untilClosest = timeRemaining( new GregorianCalendar() , holidays[earliestHoliday].date );
                 int[] untilSummer = timeRemaining( new GregorianCalendar() , holidays[holidays.length-1].date );
