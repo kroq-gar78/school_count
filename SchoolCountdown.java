@@ -335,8 +335,8 @@ public class SchoolCountdown
 
                 int[] untilClosest = timeRemaining( new GregorianCalendar() , holidays[earliestHoliday].date );
                 int[] untilSummer = timeRemaining( new GregorianCalendar() , holidays[holidays.length-1].date );
-                statementClosest.setText( "Only " + untilClosest[0] + " days, " + untilClosest[1] + " hours, " + untilClosest[2] + " minutes, and " + untilClosest[3] + " seconds until " + holidays[0].name + " and" );
-                statementEnd.setText( "Only " + untilSummer[0] + " days, " + untilSummer[1] + " hours, " + untilSummer[2] + " minutes, and " + untilSummer[3] + " seconds until " + holidays[1].name + "!" );
+                statementClosest.setText( "Only " + untilClosest[0] + " days, " + untilClosest[1] + " hours, " + untilClosest[2] + " minutes, and " + untilClosest[3] + " seconds until " + holidays[earliestHoliday].name + " and" );
+                statementEnd.setText( "Only " + untilSummer[0] + " days, " + untilSummer[1] + " hours, " + untilSummer[2] + " minutes, and " + untilSummer[3] + " seconds until " + holidays[holidays.length-1].name + "!" );
                 //icon.setToolTip( ( untilSummer[1] > 12 ? untilSummer[0]+1: untilSummer[0] ) + " days until school is over!" ); //do rounding and set tooltip at same time
 				icon.setToolTip( (untilSummer[0] <= 90 ? (( untilSummer[1] > 12 ? untilSummer[0]+1: untilSummer[0] ) + " days until school is over!" ) : 
 					(( untilClosest[1] > 12 ? untilClosest[0]+1: untilClosest[0]) + " days until the closest holiday!" )  ) ); //do rounding, choose which day to count to, and set tooltip at same time!
