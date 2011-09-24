@@ -86,7 +86,7 @@ public class SchoolCountdown
     public static Holiday springBreak = new Holiday( new GregorianCalendar( 2012 , Calendar.MARCH , 9 , 3 , 30 ) , "Spring Break" );
     public static Holiday springHoliday = new Holiday( new GregorianCalendar( 2012 , Calendar.APRIL , 5 , 3 , 30) , "the Spring holiday" );
     public static Holiday memorialDay = new Holiday( new GregorianCalendar( 2012 , Calendar.MAY , 25 , 3 , 30 ) , "Memorial Day" );
-    public static Holiday schoolEnd = new Holiday( new GregorianCalendar( 2012 , Calendar.JUNE , 1 , 12 , 40 ) , "Summer break" );
+    public static Holiday schoolEnd = new Holiday( new GregorianCalendar( 2012 , Calendar.JUNE , 1 , 12 , 40 ) , "Summer Break" );
     
     public static void main(String[] args)
     {
