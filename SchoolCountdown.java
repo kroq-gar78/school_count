@@ -98,15 +98,8 @@ public class SchoolCountdown
 		//sorts in chronological order
         java.util.Arrays.sort( holidays );
         //check when the closest one is (not passed already)
-        int earliestHoliday = holidays.length-1; //"iSave"; index of earliest holiday still to come in array "holidays"; if for loop somehow fails, default to summer
-        for(int i = 0; i < holidays.length; i++ )
-        {
-                if( holidays[i].compareTo(new GregorianCalendar()) == 1 )
-                {
-                        earliestHoliday = i;
-                        break;
-                }
-        }
+        int earliestHoliday = 0; 
+        
         //print array for confirmation
         /*for( int i = 0; i < holidays.length; i++ )
         {
@@ -252,7 +245,7 @@ public class SchoolCountdown
                     JOptionPane.showMessageDialog( null , "HAPPY SUMMER!!!!!!" , "School Countdown Timer Notification" , JOptionPane.INFORMATION_MESSAGE );
                     System.exit( 0 );
                 }
-                while( new GregorianCalendar().after( holidays[earliestHoliday].date ) )
+                while( new GregorianCalendar().after( holidays[earliestHoliday].date ) ) //check when the closest one is (not passed already)
                 {
 					earliestHoliday++;
 				}
