@@ -1,6 +1,0 @@
---SCHOOL COUNTODWN TIMER HELP--
-
-To open this program, simply double-click the main file.
-In the bottom right (system tray) you should see a bell-looking icon and a bubble that says "Welcome". When you right-click the icon, 2 choices should pop up: "Timer" and "Exit". Both are quite self explanatory. For clarification, the "Timer" option opens a dialog that has a live timer and the "Exit" option closes the program.
-
-NOTE: This application is merely a proof-of-concept. It only counts down until June 4, 2010 12:40 P.M. (end of Plano ISD Middle School).
