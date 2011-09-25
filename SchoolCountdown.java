@@ -105,14 +105,12 @@ public class SchoolCountdown
         {
 			System.out.println( holidays[i].name );
 		}*/
-        //if after school is over, open popup and close
-        if( today.after( schoolEnd.date ) )
+        if( today.after( schoolEnd.date ) ) //if after school is over, open popup and close
         {
             JOptionPane.showMessageDialog( null , "HAPPY SUMMER!!!!!!" , "School Countdown Timer Notification" , JOptionPane.INFORMATION_MESSAGE );
             System.exit( 0 );
         }
-        //exit if the system tray isn't supported
-        if( !SystemTray.isSupported() )
+        if( !SystemTray.isSupported() ) //exit if the system tray isn't supported
         {
             JOptionPane.showMessageDialog( null , "This system does not support the tray icon feature. Terminating now." , "Error" , JOptionPane.ERROR_MESSAGE );
             System.exit( 0 );
@@ -125,7 +123,7 @@ public class SchoolCountdown
         timerDisplay.add( statementEnd );
         helpDisplay = new JPanel();
 		
-		//set look and feel to system for better "implementation"
+		//set look and feel to system for better integration into the desktop
 		try
 		{
 			UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
