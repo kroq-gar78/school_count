@@ -1,8 +1,0 @@
-Main-class: SchoolCountdown
-Name: /
-Specification-Title: School Countdown Timer
-Specification-Version: 1.2
-Specification-Vendor: Eco Labyrinth, Inc.
-Implementation-Title: /
-Implementation-Version: build7
-Implementation-Vendor: Eco Labyrinth, Inc.
