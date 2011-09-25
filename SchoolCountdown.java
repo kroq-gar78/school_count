@@ -40,7 +40,6 @@ public class SchoolCountdown
 
     public static final String iconName = "schoolCountdown.gif";
     private static JPanel timerDisplay;
-    private static JPanel helpDisplay;
     private static JLabel statementEnd = new JLabel();
     private static JLabel statementClosest = new JLabel();
     public static final long millisToSec = (long)Math.pow( 10 , 3 );
@@ -121,7 +120,6 @@ public class SchoolCountdown
         timerDisplay.setLayout( new GridLayout(2,1) );
         timerDisplay.add( statementClosest );
         timerDisplay.add( statementEnd );
-        helpDisplay = new JPanel();
 		
 		//set look and feel to system for better integration into the desktop
 		try
@@ -168,21 +166,12 @@ public class SchoolCountdown
                 JOptionPane.showMessageDialog( null , timerDisplay , "School Countdown Timer notification" , JOptionPane.INFORMATION_MESSAGE );
             }
         };
-        ActionListener helpListener = new ActionListener()
-        {
-            public void actionPerformed( ActionEvent e )
-            {
-                JOptionPane.showMessageDialog( null , helpDisplay , "School Countdown Timer - Help" , JOptionPane.INFORMATION_MESSAGE );
-            }
-        };
         //create Popup menu
         PopupMenu menu = new PopupMenu();
         MenuItem timerItem = new MenuItem( "Timer" ); timerItem.addActionListener( timerListener ); //create "info' meun item
-        MenuItem helpItem = new MenuItem( "Help" ); helpItem.addActionListener( helpListener ); //create "help" menu item
         MenuItem exitItem = new MenuItem( "Exit" ); exitItem.addActionListener( exitListener ); //create "exit" menu item
         menu.add( timerItem );
         menu.addSeparator();
-        //menu.add( helpItem );
         menu.add( exitItem );
         icon = new TrayIcon( img , "days until school is over..." , menu ); //instantiate tray icon
         icon.setImageAutoSize( true ); //auto-resize icon for computer
