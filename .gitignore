@@ -2,5 +2,5 @@
 *.jar
 static/*
 *~
-schoolCountdown32.png
-schoolCountdown64.png
+schoolCountdown*.png
+Manifest*.txt
