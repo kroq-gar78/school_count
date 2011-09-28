@@ -111,7 +111,7 @@ public class SchoolCountdown
         }
         if( !SystemTray.isSupported() ) //exit if the system tray isn't supported
         {
-            JOptionPane.showMessageDialog( null , "This system does not support the tray icon feature. Terminating now." , "Error" , JOptionPane.ERROR_MESSAGE );
+            JOptionPane.showMessageDialog( null , "This system does not support the tray icon feature. Terminating now." , "School Countdown: Error" , JOptionPane.ERROR_MESSAGE );
             System.exit( 0 );
         }
         
