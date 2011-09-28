@@ -51,6 +51,7 @@ public class SchoolCountdown
 		{
 			this.date = date;
 			this.name = name;
+			this.length = 1;
 		}
 		
 		public boolean equals( Object o )
@@ -73,6 +74,7 @@ public class SchoolCountdown
 		
 		public GregorianCalendar date;
 		public String name;
+		public int length; //amount of days of holiday (excluding regular weekends)
 	}
 	
     //public static Holiday laborDay, schoolEnd = new Holiday();
