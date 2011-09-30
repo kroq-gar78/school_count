@@ -17,12 +17,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
-import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -98,7 +96,7 @@ public class SchoolCountdown
         //JLabel timer = new JLabel();
         //JProgressBar progress = new JProgressBar( 0 , (int) (1000) ); //divide to fit into int data range
         Holiday[] holidays_array = { laborDay , fallHoliday , thanksgivingBreak , winterBreak , mlkDay , presDay , springBreak , springHoliday , memorialDay , schoolEnd };
-		ArrayList<Holiday> holidays = new ArrayList<Holiday>(Arrays.asList(holidays_array));
+		ArrayList<Holiday> holidays = new ArrayList<Holiday>(java.util.Arrays.asList(holidays_array));
 		//sorts in chronological order
         Collections.sort( holidays );
         
