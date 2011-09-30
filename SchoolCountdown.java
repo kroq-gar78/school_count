@@ -239,14 +239,13 @@ public class SchoolCountdown
                 {
 					holidays.remove(0);
 				}
+				
+                String[] statements = generateMessages( holidays.get(0) , holidays.get(holidays.size()-1) );
                 
-                int[] untilClosest = timeRemaining( new GregorianCalendar() , holidays.get(0).date );
-                int[] untilSummer = timeRemaining( new GregorianCalendar() , holidays.get(holidays.size()-1).date );
-                statementClosest.setText( "Only " + untilClosest[0] + " days, " + untilClosest[1] + " hours, " + untilClosest[2] + " minutes, and " + untilClosest[3] + " seconds until " + holidays.get(0).name + " and" );
-                statementEnd.setText( "Only " + untilSummer[0] + " days, " + untilSummer[1] + " hours, " + untilSummer[2] + " minutes, and " + untilSummer[3] + " seconds until " + holidays.get(holidays.size()-1).name + "!" );
+                statementClosest.setText( statements[0] );
+                statementEnd.setText( statements[1] );
                 //icon.setToolTip( ( untilSummer[1] > 12 ? untilSummer[0]+1: untilSummer[0] ) + " days until school is over!" ); //do rounding and set tooltip at same time
-				icon.setToolTip( (untilSummer[0] <= 90 ? (( untilSummer[1] > 12 ? untilSummer[0]+1: untilSummer[0] ) + " days until school is over!" ) : 
-					(( untilClosest[1] > 12 ? untilClosest[0]+1: untilClosest[0]) + " days until the closest holiday!" )  ) ); //do rounding, choose which day to count to, and set tooltip at same time!
+				icon.setToolTip( statements[2] ); //do rounding, choose which day to count to, and set tooltip at same time!
                 
                 Thread.sleep((int) (1*(1000))); //update every 1 second
             }
@@ -274,6 +273,20 @@ public class SchoolCountdown
 
             return remainingVals;
     }
+    
+    public static String[] generateMessages( Holiday earliest , Holiday summer )
+    {
+		int[] untilClosest = timeRemaining( new GregorianCalendar() , earliest.date );
+        int[] untilSummer = timeRemaining( new GregorianCalendar() , summer.date );
+                
+		String earliestMsg = "Only " + untilClosest[0] + " day" + (untilClosest[0]==1 ? "": "s" ) + ", " + untilClosest[1] + " hour" + (untilClosest[1]==1 ? "": "s" ) + ", " + untilClosest[2] + " minute" + (untilClosest[2]==1 ? "": "s" ) + ", and " + untilClosest[3] + " second" + (untilClosest[3]==1 ? "": "s" ) + " until " + earliest.name + " and";
+		String schoolEndMsg = "Only " + untilSummer[0] + " day" + (untilSummer[0]==1 ? "": "s" ) + ", " + untilSummer[1] + " hour" + (untilSummer[1]==1 ? "": "s" ) + ", " + untilSummer[2] + " minute" + (untilSummer[2]==1 ? "": "s" ) + ", and " + untilSummer[3] + " second" + (untilSummer[3]==1 ? "": "s" ) + " until " + summer.name + "!";
+		String tooltip = tooltip = ( (untilSummer[0] <= 90 ? (( untilSummer[1] > 12 ? untilSummer[0]+1: untilSummer[0] ) + " day" + (untilSummer[0]==1 ? "":"s") + " until school is over!" ) : 
+			(( untilClosest[1] > 12 ? untilClosest[0]+1: untilClosest[0]) + " day" + (untilSummer[0]==1 ? "":"s" ) + " until the closest holiday!" )  ) ); //do rounding, choose which day to count to, and set tooltip at same time!
+		
+		String[] messages = { earliestMsg , schoolEndMsg, tooltip };
+		return messages; //messages[0],messages[1]=timer text; messages[2]=tooltip
+	}
     
     public static boolean runningFromJAR()
     {
