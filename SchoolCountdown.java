@@ -101,8 +101,6 @@ public class SchoolCountdown
 		ArrayList<Holiday> holidays = new ArrayList<Holiday>(Arrays.asList(holidays_array));
 		//sorts in chronological order
         Collections.sort( holidays );
-        //check when the closest one is (not passed already)
-        int earliestHoliday = 0; 
         
         //print array for confirmation
         /*for( int i = 0; i < holidays.length; i++ )
@@ -237,14 +235,14 @@ public class SchoolCountdown
                     JOptionPane.showMessageDialog( null , "HAPPY SUMMER!!!!!!" , "School Countdown Timer Notification" , JOptionPane.INFORMATION_MESSAGE );
                     System.exit( 0 );
                 }
-                while( new GregorianCalendar().after( holidays.get(earliestHoliday).date ) ) //check when the closest one is (not passed already)
+                while( new GregorianCalendar().after( holidays.get(0).date ) ) //check when the closest one is (not passed already)
                 {
 					holidays.remove(0);
 				}
                 
-                int[] untilClosest = timeRemaining( new GregorianCalendar() , holidays.get(earliestHoliday).date );
+                int[] untilClosest = timeRemaining( new GregorianCalendar() , holidays.get(0).date );
                 int[] untilSummer = timeRemaining( new GregorianCalendar() , holidays.get(holidays.size()-1).date );
-                statementClosest.setText( "Only " + untilClosest[0] + " days, " + untilClosest[1] + " hours, " + untilClosest[2] + " minutes, and " + untilClosest[3] + " seconds until " + holidays.get(earliestHoliday).name + " and" );
+                statementClosest.setText( "Only " + untilClosest[0] + " days, " + untilClosest[1] + " hours, " + untilClosest[2] + " minutes, and " + untilClosest[3] + " seconds until " + holidays.get(0).name + " and" );
                 statementEnd.setText( "Only " + untilSummer[0] + " days, " + untilSummer[1] + " hours, " + untilSummer[2] + " minutes, and " + untilSummer[3] + " seconds until " + holidays.get(holidays.size()-1).name + "!" );
                 //icon.setToolTip( ( untilSummer[1] > 12 ? untilSummer[0]+1: untilSummer[0] ) + " days until school is over!" ); //do rounding and set tooltip at same time
 				icon.setToolTip( (untilSummer[0] <= 90 ? (( untilSummer[1] > 12 ? untilSummer[0]+1: untilSummer[0] ) + " days until school is over!" ) : 
