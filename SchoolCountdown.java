@@ -80,19 +80,19 @@ public class SchoolCountdown
 		
 		public GregorianCalendar date;
 		public String name;
-		public int length; //amount of days of holiday (excluding regular weekends)
+		public int length; //amount of days of holiday (excluding regular weekends); weekdays of hoiday
 	}
 	
     //public static Holiday laborDay, schoolEnd = new Holiday();
-    public static Holiday laborDay = new Holiday( new GregorianCalendar( 2011, Calendar.SEPTEMBER , 2 , 3 , 30 ) , "Labor Day" );
-    public static Holiday fallHoliday = new Holiday( new GregorianCalendar( 2011, Calendar.OCTOBER , 20 , 3 , 30 ) , "the Fall holiday" ); //October 21 and 24, 2011 holidays, weekend starts October 20, 2011, 3:30 P.M.
-    public static Holiday thanksgivingBreak = new Holiday( new GregorianCalendar( 2011, Calendar.NOVEMBER , 22 , 3 , 30 ) , "Thanksgiving Break" ); //Thanksgiving 2011; holiday starts November 22, 2011, 3:30 P.M.
+    public static Holiday laborDay = new Holiday( new GregorianCalendar( 2011, Calendar.SEPTEMBER , 2 , 3 , 30 ) , "Labor Day" , 1 );
+    public static Holiday fallHoliday = new Holiday( new GregorianCalendar( 2011, Calendar.OCTOBER , 20 , 3 , 30 ) , "the Fall holiday" , 2 ); //October 21 and 24, 2011 holidays, weekend starts October 20, 2011, 3:30 P.M.
+    public static Holiday thanksgivingBreak = new Holiday( new GregorianCalendar( 2011, Calendar.NOVEMBER , 22 , 3 , 30 ) , "Thanksgiving Break" , 3 ); //Thanksgiving 2011; holiday starts November 22, 2011, 3:30 P.M.
     public static Holiday winterBreak = new Holiday( new GregorianCalendar( 2011, Calendar.DECEMBER , 18 , 12 , 40 ) , "Winter break" );
-    public static Holiday mlkDay = new Holiday( new GregorianCalendar( 2012 , Calendar.JANUARY , 13 , 3 , 30 ) , "MLK Day" );
-    public static Holiday presDay = new Holiday( new GregorianCalendar( 2012 , Calendar.FEBRUARY , 17 , 3 , 30 ) , "President's Day" );
-    public static Holiday springBreak = new Holiday( new GregorianCalendar( 2012 , Calendar.MARCH , 9 , 3 , 30 ) , "Spring Break" );
-    public static Holiday springHoliday = new Holiday( new GregorianCalendar( 2012 , Calendar.APRIL , 5 , 3 , 30) , "the Spring holiday" );
-    public static Holiday memorialDay = new Holiday( new GregorianCalendar( 2012 , Calendar.MAY , 25 , 3 , 30 ) , "Memorial Day" );
+    public static Holiday mlkDay = new Holiday( new GregorianCalendar( 2012 , Calendar.JANUARY , 13 , 3 , 30 ) , "MLK Day" , 1 );
+    public static Holiday presDay = new Holiday( new GregorianCalendar( 2012 , Calendar.FEBRUARY , 17 , 3 , 30 ) , "President's Day" , 1 );
+    public static Holiday springBreak = new Holiday( new GregorianCalendar( 2012 , Calendar.MARCH , 9 , 3 , 30 ) , "Spring Break" , 5 );
+    public static Holiday springHoliday = new Holiday( new GregorianCalendar( 2012 , Calendar.APRIL , 5 , 3 , 30) , "the Spring holiday" , 1 );
+    public static Holiday memorialDay = new Holiday( new GregorianCalendar( 2012 , Calendar.MAY , 25 , 3 , 30 ) , "Memorial Day" , 1 );
     public static Holiday schoolEnd = new Holiday( new GregorianCalendar( 2012 , Calendar.JUNE , 1 , 12 , 40 ) , "Summer Break" );
     
     public static void main(String[] args)
