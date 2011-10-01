@@ -238,7 +238,7 @@ public class SchoolCountdown
 					holidays.remove(0);
 				}
 				
-                String[] statements = generateMessages( holidays.get(0) , holidays.get(holidays.size()-1) );
+                String[] statements = generateMessages( holidays );
                 
                 statementClosest.setText( statements[0] );
                 statementEnd.setText( statements[1] );
