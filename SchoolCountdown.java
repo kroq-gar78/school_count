@@ -17,7 +17,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
@@ -27,7 +29,7 @@ import javax.swing.UIManager;
 
 /**
  * @author Aditya Vaidya <kroq.gar78@gmail.com>
- * @version 2.0
+ * @version 2.6
  */
 
 public class SchoolCountdown
@@ -95,11 +97,10 @@ public class SchoolCountdown
         GregorianCalendar today = new GregorianCalendar();
         //JLabel timer = new JLabel();
         //JProgressBar progress = new JProgressBar( 0 , (int) (1000) ); //divide to fit into int data range
-        Holiday[] holidays = { laborDay , fallHoliday , thanksgivingBreak , winterBreak , mlkDay , presDay , springBreak , springHoliday , memorialDay , schoolEnd };
+        Holiday[] holidays_array = { laborDay , fallHoliday , thanksgivingBreak , winterBreak , mlkDay , presDay , springBreak , springHoliday , memorialDay , schoolEnd };
+		ArrayList<Holiday> holidays = new ArrayList<Holiday>(java.util.Arrays.asList(holidays_array));
 		//sorts in chronological order
-        java.util.Arrays.sort( holidays );
-        //check when the closest one is (not passed already)
-        int earliestHoliday = 0; 
+        Collections.sort( holidays );
         
         //print array for confirmation
         /*for( int i = 0; i < holidays.length; i++ )
@@ -113,7 +114,7 @@ public class SchoolCountdown
         }
         if( !SystemTray.isSupported() ) //exit if the system tray isn't supported
         {
-            JOptionPane.showMessageDialog( null , "This system does not support the tray icon feature. Terminating now." , "Error" , JOptionPane.ERROR_MESSAGE );
+            JOptionPane.showMessageDialog( null , "This system does not support the tray icon feature. Terminating now." , "School Countdown: Error" , JOptionPane.ERROR_MESSAGE );
             System.exit( 0 );
         }
         
@@ -234,18 +235,17 @@ public class SchoolCountdown
                     JOptionPane.showMessageDialog( null , "HAPPY SUMMER!!!!!!" , "School Countdown Timer Notification" , JOptionPane.INFORMATION_MESSAGE );
                     System.exit( 0 );
                 }
-                while( new GregorianCalendar().after( holidays[earliestHoliday].date ) ) //check when the closest one is (not passed already)
+                while( new GregorianCalendar().after( holidays.get(0).date ) ) //check when the closest one is (not passed already)
                 {
-					earliestHoliday++;
+					holidays.remove(0);
 				}
+				
+                String[] statements = generateMessages( holidays.get(0) , holidays.get(holidays.size()-1) );
                 
-                int[] untilClosest = timeRemaining( new GregorianCalendar() , holidays[earliestHoliday].date );
-                int[] untilSummer = timeRemaining( new GregorianCalendar() , holidays[holidays.length-1].date );
-                statementClosest.setText( "Only " + untilClosest[0] + " days, " + untilClosest[1] + " hours, " + untilClosest[2] + " minutes, and " + untilClosest[3] + " seconds until " + holidays[earliestHoliday].name + " and" );
-                statementEnd.setText( "Only " + untilSummer[0] + " days, " + untilSummer[1] + " hours, " + untilSummer[2] + " minutes, and " + untilSummer[3] + " seconds until " + holidays[holidays.length-1].name + "!" );
+                statementClosest.setText( statements[0] );
+                statementEnd.setText( statements[1] );
                 //icon.setToolTip( ( untilSummer[1] > 12 ? untilSummer[0]+1: untilSummer[0] ) + " days until school is over!" ); //do rounding and set tooltip at same time
-				icon.setToolTip( (untilSummer[0] <= 90 ? (( untilSummer[1] > 12 ? untilSummer[0]+1: untilSummer[0] ) + " days until school is over!" ) : 
-					(( untilClosest[1] > 12 ? untilClosest[0]+1: untilClosest[0]) + " days until the closest holiday!" )  ) ); //do rounding, choose which day to count to, and set tooltip at same time!
+				icon.setToolTip( statements[2] ); //do rounding, choose which day to count to, and set tooltip at same time!
                 
                 Thread.sleep((int) (1*(1000))); //update every 1 second
             }
@@ -273,6 +273,20 @@ public class SchoolCountdown
 
             return remainingVals;
     }
+    
+    public static String[] generateMessages( Holiday earliest , Holiday summer )
+    {
+		int[] untilClosest = timeRemaining( new GregorianCalendar() , earliest.date );
+        int[] untilSummer = timeRemaining( new GregorianCalendar() , summer.date );
+                
+		String earliestMsg = "Only " + untilClosest[0] + " day" + (untilClosest[0]==1 ? "": "s" ) + ", " + untilClosest[1] + " hour" + (untilClosest[1]==1 ? "": "s" ) + ", " + untilClosest[2] + " minute" + (untilClosest[2]==1 ? "": "s" ) + ", and " + untilClosest[3] + " second" + (untilClosest[3]==1 ? "": "s" ) + " until " + earliest.name + " and";
+		String schoolEndMsg = "Only " + untilSummer[0] + " day" + (untilSummer[0]==1 ? "": "s" ) + ", " + untilSummer[1] + " hour" + (untilSummer[1]==1 ? "": "s" ) + ", " + untilSummer[2] + " minute" + (untilSummer[2]==1 ? "": "s" ) + ", and " + untilSummer[3] + " second" + (untilSummer[3]==1 ? "": "s" ) + " until " + summer.name + "!";
+		String tooltip = tooltip = ( (untilSummer[0] <= 90 ? (( untilSummer[1] > 12 ? untilSummer[0]+1: untilSummer[0] ) + " day" + (untilSummer[0]==1 ? "":"s") + " until school is over!" ) : 
+			(( untilClosest[1] > 12 ? untilClosest[0]+1: untilClosest[0]) + " day" + (untilSummer[0]==1 ? "":"s" ) + " until the closest holiday!" )  ) ); //do rounding, choose which day to count to, and set tooltip at same time!
+		
+		String[] messages = { earliestMsg , schoolEndMsg, tooltip };
+		return messages; //messages[0],messages[1]=timer text; messages[2]=tooltip
+	}
     
     public static boolean runningFromJAR()
     {
