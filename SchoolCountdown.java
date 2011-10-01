@@ -285,6 +285,10 @@ public class SchoolCountdown
 		String[] messages = { earliestMsg , schoolEndMsg, tooltip };
 		return messages; //messages[0],messages[1]=timer text; messages[2]=tooltip
 	}
+	public static String[] generateMessages( ArrayList<Holiday> holidays )
+	{
+		return generateMessages( holidays.get(0) , holidays.get(holidays.size()-1) );
+	}
     
     public static boolean runningFromJAR()
     {
