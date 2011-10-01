@@ -51,9 +51,13 @@ public class SchoolCountdown
 	{
 		public Holiday( GregorianCalendar date , String name )
 		{
+			this(date,name,1);
+		}
+		public Holiday( GregorianCalendar date , String name , int length )
+		{
 			this.date = date;
 			this.name = name;
-			this.length = 1;
+			this.length = length;
 		}
 		
 		public boolean equals( Object o )
