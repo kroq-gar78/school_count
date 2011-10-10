@@ -142,7 +142,7 @@ public class SchoolCountdown
         
         try
         {
-			imgURL = new SchoolCountdown().getClass().getResource(iconName);
+			imgURL = new SchoolCountdown().getClass().getResource(iconName); //gets the URL for the image, regardless of JAR or not
 			img = ImageIO.read(imgURL);
 		}
 		catch( Exception e ) //usually MalformedURLException
@@ -288,13 +288,5 @@ public class SchoolCountdown
 	public static String[] generateMessages( ArrayList<Holiday> holidays )
 	{
 		return generateMessages( holidays.get(0) , holidays.get(holidays.size()-1) );
-	}
-    
-    public static boolean runningFromJAR()
-    {
-		String className = new SchoolCountdown().getClass().getName().replace('.','/');
-		String classJar = new SchoolCountdown().getClass().getResource("/"+className+".class").toString();
-		if( classJar.startsWith("jar:") ) return true;
-		return false;
 	}
 }
