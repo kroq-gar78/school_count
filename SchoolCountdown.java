@@ -120,8 +120,7 @@ public class SchoolCountdown
         }
         
         //setup procedure - JProgressBar
-        int schoolLength = timeRemaining( schoolStart , schoolEnd.date )[0];
-        progressBar = new JProgressBar( 0 , schoolLength );
+        progressBar = new JProgressBar( 0 , timeRemaining( schoolStart , schoolEnd.date )[0] );
         progressBar.setStringPainted(true);
         
         //setup procedure - JPanel displays
