@@ -120,7 +120,8 @@ public class SchoolCountdown
         }
         
         //setup procedure - JProgressBar
-        progressBar = new JProgressBar( 0 , timeRemaining( schoolStart , schoolEnd.date )[0] );
+        int schoolLength = timeRemaining( schoolStart , schoolEnd.date )[0];
+        progressBar = new JProgressBar( 0 , schoolLength );
         progressBar.setStringPainted(true);
         
         //setup procedure - JPanel displays
@@ -252,7 +253,8 @@ public class SchoolCountdown
                 statementEnd.setText( statements[1] );
                 //icon.setToolTip( ( untilSummer[1] > 12 ? untilSummer[0]+1: untilSummer[0] ) + " days until school is over!" ); //do rounding and set tooltip at same time
 				icon.setToolTip( statements[2] ); //do rounding, choose which day to count to, and set tooltip at same time!
-                progressBar.setValue( Integer.parseInt(statements[3] ));
+                //System.out.println(statements[3]);
+                progressBar.setValue( progressBar.getMaximum() - Integer.parseInt(statements[3] ));
                 
                 Thread.sleep((int) (1*(1000))); //update every 1 second
             }
