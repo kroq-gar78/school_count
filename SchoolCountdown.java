@@ -25,6 +25,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.UIManager;
 
 /**
@@ -42,6 +43,7 @@ public class SchoolCountdown
 
     public static final String iconName = "schoolCountdown.gif";
     private static JPanel timerDisplay;
+    private static JProgressBar progressBar;
     private static JLabel statementEnd = new JLabel();
     private static JLabel statementClosest = new JLabel();
     public static final long millisToSec = (long)Math.pow( 10 , 3 );
@@ -77,7 +79,8 @@ public class SchoolCountdown
 		public String name;
 	}
 	
-    //public static Holiday laborDay, schoolEnd = new Holiday();
+    public static GregorianCalendar schoolStart = new GregorianCalendar( 2011, Calendar.AUGUST , 22 , 8 , 30 );
+    //Holiday list
     public static Holiday laborDay = new Holiday( new GregorianCalendar( 2011, Calendar.SEPTEMBER , 2 , 3 , 30 ) , "Labor Day" );
     public static Holiday fallHoliday = new Holiday( new GregorianCalendar( 2011, Calendar.OCTOBER , 20 , 3 , 30 ) , "the Fall holiday" ); //October 21 and 24, 2011 holidays, weekend starts October 20, 2011, 3:30 P.M.
     public static Holiday thanksgivingBreak = new Holiday( new GregorianCalendar( 2011, Calendar.NOVEMBER , 22 , 3 , 30 ) , "Thanksgiving Break" ); //Thanksgiving 2011; holiday starts November 22, 2011, 3:30 P.M.
@@ -116,11 +119,16 @@ public class SchoolCountdown
             System.exit( 0 );
         }
         
+        //setup procedure - JProgressBar
+        progressBar = new JProgressBar( 0 , timeRemaining( schoolStart , schoolEnd.date )[0] );
+        progressBar.setStringPainted(true);
+        
         //setup procedure - JPanel displays
         timerDisplay = new JPanel();
-        timerDisplay.setLayout( new GridLayout(2,1) );
+        timerDisplay.setLayout( new GridLayout(3,1) );
         timerDisplay.add( statementClosest );
         timerDisplay.add( statementEnd );
+        timerDisplay.add( progressBar );
 		
 		//set look and feel to system for better integration into the desktop
 		try
@@ -244,6 +252,7 @@ public class SchoolCountdown
                 statementEnd.setText( statements[1] );
                 //icon.setToolTip( ( untilSummer[1] > 12 ? untilSummer[0]+1: untilSummer[0] ) + " days until school is over!" ); //do rounding and set tooltip at same time
 				icon.setToolTip( statements[2] ); //do rounding, choose which day to count to, and set tooltip at same time!
+                progressBar.setValue( Integer.parseInt(statements[3] ));
                 
                 Thread.sleep((int) (1*(1000))); //update every 1 second
             }
@@ -282,7 +291,7 @@ public class SchoolCountdown
 		String tooltip = tooltip = ( (untilSummer[0] <= 90 ? (( untilSummer[1] > 12 ? untilSummer[0]+1: untilSummer[0] ) + " day" + (untilSummer[0]==1 ? "":"s") + " until school is over!" ) : 
 			(( untilClosest[1] > 12 ? untilClosest[0]+1: untilClosest[0]) + " day" + (untilSummer[0]==1 ? "":"s" ) + " until the closest holiday!" )  ) ); //do rounding, choose which day to count to, and set tooltip at same time!
 		
-		String[] messages = { earliestMsg , schoolEndMsg, tooltip };
+		String[] messages = { earliestMsg , schoolEndMsg, tooltip , Integer.toString(untilSummer[0]) };
 		return messages; //messages[0],messages[1]=timer text; messages[2]=tooltip
 	}
 	public static String[] generateMessages( ArrayList<Holiday> holidays )
