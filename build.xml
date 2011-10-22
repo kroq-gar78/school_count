@@ -19,6 +19,8 @@
 		<jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
 			<manifest>
 				<attribute name="Main-Class" value="SchoolCountdown" />
+				<attribute name="Specification-Title" value="School Countdown Timer" />
+				<attribute name="Specification-Vendor" value="Eco Labyrinth, Inc." />
 			</manifest>
 			<fileset dir="." includes="schoolCountdown.gif" />
 		</jar>
