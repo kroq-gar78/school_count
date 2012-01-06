@@ -289,6 +289,7 @@ public class SchoolCountdown
     {
     	int[] untilSummer = timeRemaining( new GregorianCalendar() , summer.date );
     	String schoolEndMsg = "Only " + untilSummer[0] + " day" + (untilSummer[0]==1 ? "": "s" ) + ", " + untilSummer[1] + " hour" + (untilSummer[1]==1 ? "": "s" ) + ", " + untilSummer[2] + " minute" + (untilSummer[2]==1 ? "": "s" ) + ", and " + untilSummer[3] + " second" + (untilSummer[3]==1 ? "": "s" ) + " until " + summer.name + "!";
+    	String tooltip = tooltip = ( ( untilSummer[1] > 12 ? untilSummer[0]+1: untilSummer[0] ) + " day" + (untilSummer[0]==1 ? "":"s") + " until school is over!" );
 		return new Object[]{schoolEndMsg,untilSummer};
     }
 	public static String[] generateMessages( ArrayList<Holiday> holidays )
