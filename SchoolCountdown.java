@@ -18,7 +18,6 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
@@ -161,7 +160,7 @@ public class SchoolCountdown
         {
             System.err.println(e);
             JOptionPane.showMessageDialog( null , "School Countdown Timer has experienced an unknown error." , "Error" , JOptionPane.ERROR_MESSAGE );
-            System.exit(0);
+            System.exit(1);
         }
 
         //timed update
