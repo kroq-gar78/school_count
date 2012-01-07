@@ -96,7 +96,7 @@ public class SchoolCountdown
         Holiday[] holidays_array = { laborDay , fallHoliday , thanksgivingBreak , winterBreak , mlkDay , presDay , springBreak , springHoliday , memorialDay , schoolEnd };
 		ArrayList<Holiday> holidays = new ArrayList<Holiday>(java.util.Arrays.asList(holidays_array));
 		
-		Collections.sort( holidays ); // sort array in chronological order
+		java.util.Collections.sort( holidays ); // sort array in chronological order
         
         //print array for confirmation
         /*for( int i = 0; i < holidays.length; i++ )
@@ -238,12 +238,12 @@ public class SchoolCountdown
 				}
 				
                 String[] statements = generateMessages( holidays );
-                
-                statementClosest.setText( statements[0] );
+                if( statements.length==3 ) statementClosest.setText( statements[0] );
                 statementEnd.setText( statements[1] );
                 //icon.setToolTip( ( untilSummer[1] > 12 ? untilSummer[0]+1: untilSummer[0] ) + " days until school is over!" ); //do rounding and set tooltip at same time
-				icon.setToolTip( statements[2] ); //do rounding, choose which day to count to, and set tooltip at same time!
-                
+				if( statements.length==3 ) icon.setToolTip( statements[2] ); //do rounding, choose which day to count to, and set tooltip at same time!
+				else icon.setToolTip( statements[1] ); // if length is not 3, must be 2; this means Summer Break is closer than other holidays
+				
                 Thread.sleep((int) (1*(1000))); //update every 1 second
             }
             catch (InterruptedException e)
