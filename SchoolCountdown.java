@@ -168,7 +168,7 @@ public class SchoolCountdown
         {
             try
             {
-                if( new GregorianCalendar().after( schoolEnd ) ) //if after school is over, open popup and close
+                if( new GregorianCalendar().after( Holiday.schoolEnd ) ) //if after school is over, open popup and close
                 {
                     JOptionPane.showMessageDialog( null , "HAPPY SUMMER!!!!!!" , "School Countdown Timer Notification" , JOptionPane.INFORMATION_MESSAGE );
                     System.exit( 0 );
