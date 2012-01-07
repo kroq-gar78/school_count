@@ -92,7 +92,6 @@ public class SchoolCountdown
     public static void main(String[] args)
     {
         TrayIcon icon = null;
-        GregorianCalendar today = new GregorianCalendar();
         //JLabel timer = new JLabel();
         //JProgressBar progress = new JProgressBar( 0 , (int) (1000) ); //divide to fit into int data range
         Holiday[] holidays_array = { laborDay , fallHoliday , thanksgivingBreak , winterBreak , mlkDay , presDay , springBreak , springHoliday , memorialDay , schoolEnd };
@@ -105,7 +104,7 @@ public class SchoolCountdown
         {
 			System.out.println( holidays[i].name );
 		}*/
-        if( today.after( schoolEnd.date ) ) //if after school is over, open popup and close
+        if( new GregorianCalendar().after( schoolEnd.date ) ) //if after school is over, open popup and close
         {
             JOptionPane.showMessageDialog( null , "HAPPY SUMMER!!!!!!" , "School Countdown Timer Notification" , JOptionPane.INFORMATION_MESSAGE );
             System.exit( 0 );
