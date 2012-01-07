@@ -89,7 +89,6 @@ public class SchoolCountdown
      */
     public static void main(String[] args)
     {
-        TrayIcon icon = null;
         Holiday[] holidays_array = { laborDay , fallHoliday , thanksgivingBreak , winterBreak , mlkDay , presDay , springBreak , springHoliday , memorialDay , schoolEnd };
 		ArrayList<Holiday> holidays = new ArrayList<Holiday>(java.util.Arrays.asList(holidays_array));
 		//sorts in chronological order
@@ -171,7 +170,7 @@ public class SchoolCountdown
         menu.add( timerItem );
         menu.addSeparator();
         menu.add( exitItem );
-        icon = new TrayIcon( img , "Error: failed to load holidays" , menu ); //instantiate tray icon
+        TrayIcon icon = new TrayIcon( img , "Error: failed to load holidays" , menu ); //instantiate tray icon
         icon.setImageAutoSize(true); //auto-resize icon for computer
         icon.addMouseListener
         (
