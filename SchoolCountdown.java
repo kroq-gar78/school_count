@@ -38,7 +38,7 @@ public class SchoolCountdown
     private static JLabel statementEnd;
     private static JLabel statementClosest;
     public static final long millisToSec = (long)(1000); // number of milliseconds in a seconds
-    public static final int hour_sec = 60*60; //num of seconds in an hour
+    public static final int hoursToSec = 60*60; //num of seconds in an hour
     
     // pretty much a struct, but with more functionality ;)
     static class Holiday implements Comparable<Holiday>
@@ -244,10 +244,10 @@ public class SchoolCountdown
 
             int seconds = (int)((end.getTimeInMillis() - start.getTimeInMillis())/millisToSec); //seconds remaining
 
-            remainingVals[0] = seconds/(24*hour_sec); //days
-            seconds %= (24*hour_sec);
-            remainingVals[1] = seconds/hour_sec; //hours
-            seconds %= hour_sec;
+            remainingVals[0] = seconds/(24*hoursToSec); //days
+            seconds %= (24*hoursToSec);
+            remainingVals[1] = seconds/hoursToSec; //hours
+            seconds %= hoursToSec;
             remainingVals[2] = seconds/60; //minutes
             seconds %= 60;
             remainingVals[3] = seconds; //seconds
