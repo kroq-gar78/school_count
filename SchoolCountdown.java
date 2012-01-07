@@ -37,8 +37,6 @@ public class SchoolCountdown
      * @param args the command line arguments
      */
 
-    public static final int longConverter = (int)Math.pow( 2 , 16 );
-
     public static final String iconName = "schoolCountdown.gif";
     private static JPanel timerDisplay;
     private static JLabel statementEnd = new JLabel();
