@@ -39,37 +39,6 @@ public class SchoolCountdown
     private static JLabel statementClosest;
     public static final long millisToSec = (long)(1000); // number of milliseconds in a seconds
     public static final int hoursToSec = 60*60; //num of seconds in an hour
-    
-    // pretty much a struct, but with more functionality ;)
-    static class Holiday implements Comparable<Holiday>
-	{
-		public Holiday( GregorianCalendar date , String name )
-		{
-			this.date = date;
-			this.name = name;
-		}
-		
-		public boolean equals( Object o )
-		{
-			if(!(o instanceof Holiday ) )
-			{
-				return false;
-			}
-			Holiday h = (Holiday)o;
-			return (h.date==this.date)&&(h.name==this.name);
-		}
-		public int compareTo( Holiday o )
-		{
-			return ( this.date.after(o.date) ? 1:-1 );
-		}
-		public int compareTo( GregorianCalendar o )
-		{
-			return ( this.date.after(o) ? 1:-1 );
-		}
-		
-		public GregorianCalendar date;
-		public String name;
-	}
 	
     //public static Holiday laborDay, schoolEnd = new Holiday();
     public static Holiday laborDay = new Holiday( new GregorianCalendar( 2011, Calendar.SEPTEMBER , 2 , 15 , 30 ) , "Labor Day" );
