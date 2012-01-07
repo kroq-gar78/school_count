@@ -27,7 +27,7 @@ import javax.swing.UIManager;
 
 /**
  * @author Aditya Vaidya <kroq.gar78@gmail.com>
- * @version 2.6
+ * @version 2.8
  */
 
 public class SchoolCountdown
