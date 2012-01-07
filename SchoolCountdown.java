@@ -171,7 +171,7 @@ public class SchoolCountdown
         menu.add( timerItem );
         menu.addSeparator();
         menu.add( exitItem );
-        icon = new TrayIcon( img , "days until school is over..." , menu ); //instantiate tray icon
+        icon = new TrayIcon( img , "Error: failed to load holidays" , menu ); //instantiate tray icon
         icon.setImageAutoSize(true); //auto-resize icon for computer
         icon.addMouseListener
         (
