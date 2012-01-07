@@ -38,50 +38,7 @@ public class SchoolCountdown
     private static JLabel statementClosest;
     public static final long millisToSec = (long)(1000); // number of milliseconds in a seconds
     public static final int hoursToSec = 60*60; //num of seconds in an hour
-    
-    // pretty much a struct, but with more functionality ;)
-    static class Holiday implements Comparable<Holiday>
-	{
-		public Holiday( GregorianCalendar date , String name )
-		{
-			this.date = date;
-			this.name = name;
-		}
-		
-		public boolean equals( Object o )
-		{
-			if(!(o instanceof Holiday ) )
-			{
-				return false;
-			}
-			Holiday h = (Holiday)o;
-			return (h.date==this.date)&&(h.name==this.name);
-		}
-		public int compareTo( Holiday o )
-		{
-			return ( this.date.after(o.date) ? 1:-1 );
-		}
-		public int compareTo( GregorianCalendar o )
-		{
-			return ( this.date.after(o) ? 1:-1 );
-		}
-		
-		public GregorianCalendar date;
-		public String name;
-	}
 	
-    //public static Holiday laborDay, schoolEnd = new Holiday();
-    public static Holiday laborDay = new Holiday( new GregorianCalendar( 2011, GregorianCalendar.SEPTEMBER , 2 , 15 , 30 ) , "Labor Day" );
-    public static Holiday fallHoliday = new Holiday( new GregorianCalendar( 2011, GregorianCalendar.OCTOBER , 20 , 15 , 30 ) , "the Fall holiday" ); //October 21 and 24, 2011 holidays, weekend starts October 20, 2011, 3:30 P.M.
-    public static Holiday thanksgivingBreak = new Holiday( new GregorianCalendar( 2011, GregorianCalendar.NOVEMBER , 22 , 15 , 30 ) , "Thanksgiving Break" ); //Thanksgiving 2011; holiday starts November 22, 2011, 3:30 P.M.
-    public static Holiday winterBreak = new Holiday( new GregorianCalendar( 2011, GregorianCalendar.DECEMBER , 18 , 12 , 40 ) , "Winter break" );
-    public static Holiday mlkDay = new Holiday( new GregorianCalendar( 2012 , GregorianCalendar.JANUARY , 13 , 15 , 30 ) , "MLK Day" );
-    public static Holiday presDay = new Holiday( new GregorianCalendar( 2012 , GregorianCalendar.FEBRUARY , 17 , 15 , 30 ) , "President's Day" );
-    public static Holiday springBreak = new Holiday( new GregorianCalendar( 2012 , GregorianCalendar.MARCH , 9 , 15 , 30 ) , "Spring Break" );
-    public static Holiday springHoliday = new Holiday( new GregorianCalendar( 2012 , GregorianCalendar.APRIL , 5 , 15 , 30) , "the Spring holiday" );
-    public static Holiday memorialDay = new Holiday( new GregorianCalendar( 2012 , GregorianCalendar.MAY , 25 , 15 , 30 ) , "Memorial Day" );
-    public static Holiday schoolEnd = new Holiday( new GregorianCalendar( 2012 , GregorianCalendar.JUNE , 1 , 12 , 40 ) , "Summer Break" );
-
     /**
      * The main execution sequence and loop
      * 
@@ -89,18 +46,17 @@ public class SchoolCountdown
      */
     public static void main(String[] args)
     {
-        Holiday[] holidays_array = { laborDay , fallHoliday , thanksgivingBreak , winterBreak , mlkDay , presDay , springBreak , springHoliday , memorialDay , schoolEnd };
-		ArrayList<Holiday> holidays = new ArrayList<Holiday>(java.util.Arrays.asList(holidays_array));
-		//sorts in chronological order
-        java.util.Collections.sort( holidays );
+    	ArrayList<Holiday> holidays = new ArrayList<Holiday>(java.util.Arrays.asList(Holiday.values()));
+		
+        java.util.Collections.sort( holidays ); //sort in chronological order
         
         //print array for confirmation
         /*for( int i = 0; i < holidays.length; i++ )
         {
 			System.out.println( holidays[i].name );
 		}*/
-
-        if( new GregorianCalendar().after( schoolEnd.date ) ) //if after school is over, open popup and close
+        
+        if( new GregorianCalendar().after( Holiday.schoolEnd.date ) ) //if after school is over, open popup and close
         {
             JOptionPane.showMessageDialog( null , "HAPPY SUMMER!!!!!!" , "School Countdown Timer Notification" , JOptionPane.INFORMATION_MESSAGE );
             System.exit(0);
@@ -171,7 +127,7 @@ public class SchoolCountdown
         menu.add( timerItem );
         menu.addSeparator();
         menu.add( exitItem );
-        TrayIcon icon = new TrayIcon( img , "Error: failed to load holidays" , menu ); //instantiate tray icon
+        TrayIcon icon = new TrayIcon( img , "Error: failed to load holidays" , menu ); //instantiate tray icon with a default message as failure
         icon.setImageAutoSize(true); //auto-resize icon for computer
         icon.addMouseListener
         (
@@ -211,12 +167,12 @@ public class SchoolCountdown
         {
             try
             {
-                if( new GregorianCalendar().after( schoolEnd ) ) //if after school is over, open popup and close
+                if( new GregorianCalendar().after( Holiday.schoolEnd ) ) //if after school is over, open popup and close
                 {
                     JOptionPane.showMessageDialog( null , "HAPPY SUMMER!!!!!!" , "School Countdown Timer Notification" , JOptionPane.INFORMATION_MESSAGE );
                     System.exit( 0 );
                 }
-                while( new GregorianCalendar().after( holidays.get(0).date ) ) //check when the closest one is (not passed already)
+                while( new GregorianCalendar().after( holidays.get(0).date ) ) // check if closest one has passed already; if it has, remove it from the list
                 {
 					holidays.remove(0);
 				}
