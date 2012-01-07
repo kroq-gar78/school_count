@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project name="SchoolCount" basedir="." default="main">
+<project name="SchoolCountdown" basedir="." default="main">
 	<property name="src.dir" value="." />
 	<property name="build.dir" value="build" />
 	<property name="classes.dir" value="${build.dir}/classes" />
