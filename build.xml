@@ -32,5 +32,5 @@
 	
 	<target name="build" depends="clean,compile,jar" />
 	
-	<target name="main" depends="clean,compile,jar,run"/>
+	<target name="main" depends="clean,compile,jar"/>
 </project>
