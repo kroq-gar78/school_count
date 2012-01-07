@@ -203,7 +203,7 @@ public class SchoolCountdown
         {
             System.err.println(e);
             JOptionPane.showMessageDialog( null , "School Countdown Timer has experienced an unknown error." , "Error" , JOptionPane.ERROR_MESSAGE );
-            System.exit(0);
+            System.exit(1);
         }
 
         //timed update
