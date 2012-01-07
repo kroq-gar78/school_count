@@ -172,7 +172,7 @@ public class SchoolCountdown
                     JOptionPane.showMessageDialog( null , "HAPPY SUMMER!!!!!!" , "School Countdown Timer Notification" , JOptionPane.INFORMATION_MESSAGE );
                     System.exit( 0 );
                 }
-                while( new GregorianCalendar().after( holidays.get(0).date ) ) //check when the closest one is (not passed already)
+                while( new GregorianCalendar().after( holidays.get(0).date ) ) // check if closest one has passed already; if it has, remove it from the list
                 {
 					holidays.remove(0);
 				}
