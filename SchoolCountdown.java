@@ -6,8 +6,8 @@
 import java.awt.AWTException;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.PopupMenu;
 import java.awt.MenuItem;
+import java.awt.PopupMenu;
 import java.awt.SystemTray;
 import java.awt.Toolkit;
 import java.awt.TrayIcon;
@@ -33,17 +33,14 @@ import javax.swing.UIManager;
 
 public class SchoolCountdown
 {
-    /**
-     * @param args the command line arguments
-     */
-
     public static final String iconName = "schoolCountdown.gif";
     private static JPanel timerDisplay;
-    private static JLabel statementEnd = new JLabel();
-    private static JLabel statementClosest = new JLabel();
-    public static final long millisToSec = (long)Math.pow( 10 , 3 );
+    private static JLabel statementEnd;
+    private static JLabel statementClosest;
+    public static final long millisToSec = (long)(1000); // number of milliseconds in a seconds
     public static final int hour_sec = 60*60; //num of seconds in an hour
     
+    // pretty much a struct, but with more functionality ;)
     static class Holiday implements Comparable<Holiday>
 	{
 		public Holiday( GregorianCalendar date , String name )
@@ -85,12 +82,15 @@ public class SchoolCountdown
     public static Holiday springHoliday = new Holiday( new GregorianCalendar( 2012 , Calendar.APRIL , 5 , 15 , 30) , "the Spring holiday" );
     public static Holiday memorialDay = new Holiday( new GregorianCalendar( 2012 , Calendar.MAY , 25 , 15 , 30 ) , "Memorial Day" );
     public static Holiday schoolEnd = new Holiday( new GregorianCalendar( 2012 , Calendar.JUNE , 1 , 12 , 40 ) , "Summer Break" );
-    
+
+    /**
+     * The main execution sequence and loop
+     * 
+     * @param args the command line arguments
+     */
     public static void main(String[] args)
     {
         TrayIcon icon = null;
-        //JLabel timer = new JLabel();
-        //JProgressBar progress = new JProgressBar( 0 , (int) (1000) ); //divide to fit into int data range
         Holiday[] holidays_array = { laborDay , fallHoliday , thanksgivingBreak , winterBreak , mlkDay , presDay , springBreak , springHoliday , memorialDay , schoolEnd };
 		ArrayList<Holiday> holidays = new ArrayList<Holiday>(java.util.Arrays.asList(holidays_array));
 		//sorts in chronological order
@@ -104,15 +104,17 @@ public class SchoolCountdown
         if( new GregorianCalendar().after( schoolEnd.date ) ) //if after school is over, open popup and close
         {
             JOptionPane.showMessageDialog( null , "HAPPY SUMMER!!!!!!" , "School Countdown Timer Notification" , JOptionPane.INFORMATION_MESSAGE );
-            System.exit( 0 );
+            System.exit(0);
         }
         if( !SystemTray.isSupported() ) //exit if the system tray isn't supported
         {
             JOptionPane.showMessageDialog( null , "This system does not support the tray icon feature. Terminating now." , "School Countdown: Error" , JOptionPane.ERROR_MESSAGE );
-            System.exit( 0 );
+            System.exit(0);
         }
         
         //setup procedure - JPanel displays
+        statementClosest = new JLabel();
+        statementEnd = new JLabel();
         timerDisplay = new JPanel();
         timerDisplay.setLayout( new GridLayout(2,1) );
         timerDisplay.add( statementClosest );
@@ -171,7 +173,7 @@ public class SchoolCountdown
         menu.addSeparator();
         menu.add( exitItem );
         icon = new TrayIcon( img , "days until school is over..." , menu ); //instantiate tray icon
-        icon.setImageAutoSize( true ); //auto-resize icon for computer
+        icon.setImageAutoSize(true); //auto-resize icon for computer
         icon.addMouseListener
         (
                 new MouseListener()
@@ -183,44 +185,30 @@ public class SchoolCountdown
                             JOptionPane.showMessageDialog( null , timerDisplay , "School Countdown Timer notification" , JOptionPane.INFORMATION_MESSAGE );
                         }
                     }
-
-                    public void mousePressed(MouseEvent e)
-                    {
-                        //throw new UnsupportedOperationException("Not supported yet.");
-                    }
-
-                    public void mouseReleased(MouseEvent e)
-                    {
-                        //throw new UnsupportedOperationException("Not supported yet.");
-                    }
-
-                    public void mouseEntered(MouseEvent e)
-                    {
-                        //throw new UnsupportedOperationException("Not supported yet.");
-                    }
-
-                    public void mouseExited(MouseEvent e)
-                    {
-                        //throw new UnsupportedOperationException("Not supported yet.");
-                    }
+                    
+                    // just some unneeded and unnecessary functions that aren't implemented
+                    public void mousePressed(MouseEvent e) {}
+                    public void mouseReleased(MouseEvent e) {}
+                    public void mouseEntered(MouseEvent e) {}
+                    public void mouseExited(MouseEvent e) {}
                 }
         );
 
         //add icon to tray
         try
         {
-            tray.add( icon );
+            tray.add(icon);
             icon.displayMessage( "Welcome" , "Welcome to School Countdown Timer" , TrayIcon.MessageType.NONE );
         }
         catch( AWTException e )
         {
-            System.err.println( e );
+            System.err.println(e);
             JOptionPane.showMessageDialog( null , "School Countdown Timer has experienced an unknown error." , "Error" , JOptionPane.ERROR_MESSAGE );
             System.exit(0);
         }
 
         //timed update
-        for( ;; )
+        for(;;)
         {
             try
             {
@@ -238,10 +226,9 @@ public class SchoolCountdown
                 
                 statementClosest.setText( statements[0] );
                 statementEnd.setText( statements[1] );
-                //icon.setToolTip( ( untilSummer[1] > 12 ? untilSummer[0]+1: untilSummer[0] ) + " days until school is over!" ); //do rounding and set tooltip at same time
-				icon.setToolTip( statements[2] ); //do rounding, choose which day to count to, and set tooltip at same time!
+                icon.setToolTip( statements[2] ); //do rounding, choose which day to count to, and set tooltip at same time!
                 
-                Thread.sleep((int) (1*(1000))); //update every 1 second
+                Thread.sleep((int)(1*(1000))); //update every 1 second
             }
             catch (InterruptedException e)
             {
