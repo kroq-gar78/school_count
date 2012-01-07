@@ -19,7 +19,6 @@ import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.GregorianCalendar;
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
@@ -97,7 +96,7 @@ public class SchoolCountdown
         Holiday[] holidays_array = { laborDay , fallHoliday , thanksgivingBreak , winterBreak , mlkDay , presDay , springBreak , springHoliday , memorialDay , schoolEnd };
 		ArrayList<Holiday> holidays = new ArrayList<Holiday>(java.util.Arrays.asList(holidays_array));
 		//sorts in chronological order
-        Collections.sort( holidays );
+        java.util.Collections.sort( holidays );
         
         //print array for confirmation
         /*for( int i = 0; i < holidays.length; i++ )
