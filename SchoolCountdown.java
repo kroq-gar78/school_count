@@ -274,7 +274,7 @@ public class SchoolCountdown
     public static String[] generateMessages( Holiday earliest , Holiday summer )
     {
 		int[] untilClosest = timeRemaining( new GregorianCalendar() , earliest.date );
-        Object[] summerResults = generateSummerMessage(summer);
+        Object[] summerResults = generateSummerData(summer);
 		int[] untilSummer = (int[])(summerResults[1]);
         
 		String earliestMsg = "Only " + untilClosest[0] + " day" + (untilClosest[0]==1 ? "": "s" ) + ", " + untilClosest[1] + " hour" + (untilClosest[1]==1 ? "": "s" ) + ", " + untilClosest[2] + " minute" + (untilClosest[2]==1 ? "": "s" ) + ", and " + untilClosest[3] + " second" + (untilClosest[3]==1 ? "": "s" ) + " until " + earliest.name + " and";
@@ -284,19 +284,23 @@ public class SchoolCountdown
 		
 		return new String[]{ earliestMsg , (String)(summerResults[0]) , tooltip }; //messages[0],messages[1]=timer text; messages[2]=tooltip
 	}
-    public static Object[] generateSummerMessage( Holiday summer )
+    public static Object[] generateSummerData( Holiday summer )
     {
     	int[] untilSummer = timeRemaining( new GregorianCalendar() , summer.date );
     	String schoolEndMsg = "Only " + untilSummer[0] + " day" + (untilSummer[0]==1 ? "": "s" ) + ", " + untilSummer[1] + " hour" + (untilSummer[1]==1 ? "": "s" ) + ", " + untilSummer[2] + " minute" + (untilSummer[2]==1 ? "": "s" ) + ", and " + untilSummer[3] + " second" + (untilSummer[3]==1 ? "": "s" ) + " until " + summer.name + "!";
     	String tooltip = tooltip = ( ( untilSummer[1] > 12 ? untilSummer[0]+1: untilSummer[0] ) + " day" + (untilSummer[0]==1 ? "":"s") + " until school is over!" );
 		return new Object[]{schoolEndMsg,untilSummer,tooltip};
     }
+    public static String[] generateSummerMessageOnly( Holiday summer )
+    {
+    	Object[] results = generateSummerData(summer);
+    	return new String[]{ "The closest holiday is Summer Break!" , (String)(results[0]) , (String)(results[2]) };
+    }
 	public static String[] generateMessages( ArrayList<Holiday> holidays )
 	{
 		if( holidays.get(0).equals(holidays.get(holidays.size()-1) ) )
 		{
-			Object[] results = generateSummerMessage(holidays.get(holidays.size()-1));
-			return ( new String[]{ (String)(results[0]) , (String)(results[2]) } );
+			return generateSummerMessageOnly( holidays.get(holidays.size()-1) );
 		}
 		return generateMessages( holidays.get(0) , holidays.get(holidays.size()-1) );
 	}
