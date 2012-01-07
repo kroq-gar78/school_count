@@ -99,6 +99,7 @@ public class SchoolCountdown
         {
 			System.out.println( holidays[i].name );
 		}*/
+
         if( new GregorianCalendar().after( schoolEnd.date ) ) //if after school is over, open popup and close
         {
             JOptionPane.showMessageDialog( null , "HAPPY SUMMER!!!!!!" , "School Countdown Timer Notification" , JOptionPane.INFORMATION_MESSAGE );
@@ -221,12 +222,12 @@ public class SchoolCountdown
 				}
 				
                 String[] statements = generateMessages( holidays );
-                
                 statementClosest.setText( statements[0] );
                 statementEnd.setText( statements[1] );
-                icon.setToolTip( statements[2] ); //do rounding, choose which day to count to, and set tooltip at same time!
                 
-                Thread.sleep((int)(1*(1000))); //update every 1 second
+                icon.setToolTip( statements[2] );
+
+                Thread.sleep((int) (1*(1000))); //update every 1 second
             }
             catch (InterruptedException e)
             {
@@ -256,18 +257,34 @@ public class SchoolCountdown
     public static String[] generateMessages( Holiday earliest , Holiday summer )
     {
 		int[] untilClosest = timeRemaining( new GregorianCalendar() , earliest.date );
-        int[] untilSummer = timeRemaining( new GregorianCalendar() , summer.date );
-                
+        Object[] summerResults = generateSummerData(summer);
+		int[] untilSummer = (int[])(summerResults[1]);
+        
 		String earliestMsg = "Only " + untilClosest[0] + " day" + (untilClosest[0]==1 ? "": "s" ) + ", " + untilClosest[1] + " hour" + (untilClosest[1]==1 ? "": "s" ) + ", " + untilClosest[2] + " minute" + (untilClosest[2]==1 ? "": "s" ) + ", and " + untilClosest[3] + " second" + (untilClosest[3]==1 ? "": "s" ) + " until " + earliest.name + " and";
-		String schoolEndMsg = "Only " + untilSummer[0] + " day" + (untilSummer[0]==1 ? "": "s" ) + ", " + untilSummer[1] + " hour" + (untilSummer[1]==1 ? "": "s" ) + ", " + untilSummer[2] + " minute" + (untilSummer[2]==1 ? "": "s" ) + ", and " + untilSummer[3] + " second" + (untilSummer[3]==1 ? "": "s" ) + " until " + summer.name + "!";
-		String tooltip = tooltip = ( (untilSummer[0] <= 90 ? (( untilSummer[1] > 12 ? untilSummer[0]+1: untilSummer[0] ) + " day" + (untilSummer[0]==1 ? "":"s") + " until school is over!" ) : 
-			(( untilClosest[1] > 12 ? untilClosest[0]+1: untilClosest[0]) + " day" + (untilClosest[0]==1 ? "":"s" ) + " until the closest holiday!" )  ) ); //do rounding, choose which day to count to, and set tooltip at same time!
 		
-		String[] messages = { earliestMsg , schoolEndMsg, tooltip };
-		return messages; //messages[0],messages[1]=timer text; messages[2]=tooltip
+		//do rounding, choose which day to count to, and set tooltip at same time!
+		String tooltip = tooltip = ( (untilSummer[0] <= 90 ? (String)(summerResults[2]) : (( untilClosest[1] > 12 ? untilClosest[0]+1: untilClosest[0]) + " day" + (untilClosest[0]==1 ? "":"s" ) + " until the closest holiday!" )  ) );
+		
+		return new String[]{ earliestMsg , (String)(summerResults[0]) , tooltip }; //messages[0],messages[1]=timer text; messages[2]=tooltip
 	}
+    public static Object[] generateSummerData( Holiday summer )
+    {
+    	int[] untilSummer = timeRemaining( new GregorianCalendar() , summer.date );
+    	String schoolEndMsg = "Only " + untilSummer[0] + " day" + (untilSummer[0]==1 ? "": "s" ) + ", " + untilSummer[1] + " hour" + (untilSummer[1]==1 ? "": "s" ) + ", " + untilSummer[2] + " minute" + (untilSummer[2]==1 ? "": "s" ) + ", and " + untilSummer[3] + " second" + (untilSummer[3]==1 ? "": "s" ) + " until " + summer.name + "!";
+    	String tooltip = tooltip = ( ( untilSummer[1] > 12 ? untilSummer[0]+1: untilSummer[0] ) + " day" + (untilSummer[0]==1 ? "":"s") + " until school is over!" );
+		return new Object[]{schoolEndMsg,untilSummer,tooltip};
+    }
+    public static String[] generateSummerMessageOnly( Holiday summer )
+    {
+    	Object[] results = generateSummerData(summer);
+    	return new String[]{ "The closest holiday is Summer Break!" , (String)(results[0]) , (String)(results[2]) };
+    }
 	public static String[] generateMessages( ArrayList<Holiday> holidays )
 	{
+		if( holidays.get(0).equals(holidays.get(holidays.size()-1) ) )
+		{
+			return generateSummerMessageOnly( holidays.get(holidays.size()-1) );
+		}
 		return generateMessages( holidays.get(0) , holidays.get(holidays.size()-1) );
 	}
 }
