@@ -132,7 +132,7 @@ public class SchoolCountdown
 			JOptionPane.showMessageDialog( null , "School Countdown Timer failed to retrieve the system look and feel. Falling back to default look and feel." , "Warning" , JOptionPane.WARNING_MESSAGE );
 		}
         //setup procedure - Tray Icon
-        System.out.println( "running..." );
+        System.out.println( "Running..." );
         SystemTray tray = SystemTray.getSystemTray(); //retrieve instance
         BufferedImage img = null;
         URL imgURL = null;
@@ -146,7 +146,7 @@ public class SchoolCountdown
 		{
 			e.printStackTrace();
 			JOptionPane.showMessageDialog( null , "School Countdown Timer encountered an error while\ntrying to load the icon. Terminating now." , "Error" , JOptionPane.ERROR_MESSAGE );
-			System.err.println( "Error loading Icon. Now exiting..." );
+			System.err.println( "Error loading icon. Now exiting..." );
 			System.exit(1); //exit with error code
 		}
 		
