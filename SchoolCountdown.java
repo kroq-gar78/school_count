@@ -47,8 +47,7 @@ public class SchoolCountdown
     public static void main(String[] args)
     {
         TrayIcon icon = null;
-        Holiday[] holidays_array = { Holiday.laborDay , Holiday.fallHoliday , Holiday.thanksgivingBreak , Holiday.winterBreak , Holiday.mlkDay , Holiday.presDay , Holiday.springBreak , Holiday.springHoliday , Holiday.memorialDay , Holiday.schoolEnd };
-		ArrayList<Holiday> holidays = new ArrayList<Holiday>(java.util.Arrays.asList(holidays_array));
+        ArrayList<Holiday> holidays = new ArrayList<Holiday>(java.util.Arrays.asList(Holiday.values()));
 		//sorts in chronological order
         java.util.Collections.sort( holidays );
         
