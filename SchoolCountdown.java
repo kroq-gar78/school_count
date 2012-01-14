@@ -156,8 +156,8 @@ public class SchoolCountdown
         }
         catch( AWTException e )
         {
-            System.err.println(e);
-            JOptionPane.showMessageDialog( null , "School Countdown Timer has experienced an unknown error." , "Error" , JOptionPane.ERROR_MESSAGE );
+            e.printStackTrace();
+            JOptionPane.showMessageDialog( null , "School Countdown Timer has experienced an unknown error\nrelating to the tray icon." , "Error" , JOptionPane.ERROR_MESSAGE );
             System.exit(1);
         }
 
