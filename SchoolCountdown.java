@@ -123,12 +123,12 @@ public class SchoolCountdown
         };
         // create Popup menu
         PopupMenu menu = new PopupMenu();
-        MenuItem timerItem = new MenuItem( "Timer" ); timerItem.addActionListener( timerListener ); //create "info' meun item
-        MenuItem exitItem = new MenuItem( "Exit" ); exitItem.addActionListener( exitListener ); //create "exit" menu item
+        MenuItem timerItem = new MenuItem( "Timer" ); timerItem.addActionListener( timerListener ); // create "info' menu item
+        MenuItem exitItem = new MenuItem( "Exit" ); exitItem.addActionListener( exitListener ); // create "exit" menu item
         menu.add( timerItem );
         menu.addSeparator();
         menu.add( exitItem );
-        TrayIcon icon = new TrayIcon( img , "Error: failed to load holidays" , menu ); //instantiate tray icon with a default message as failure
+        TrayIcon icon = new TrayIcon( img , "Error: failed to load holidays" , menu ); // instantiate tray icon with a default message as failure
         icon.setImageAutoSize(true); // auto-resize icon for computer
         icon.addMouseListener
         (
@@ -150,7 +150,7 @@ public class SchoolCountdown
                 }
         );
 
-        //add icon to tray
+        // add icon to tray
         try
         {
             tray.add(icon);
@@ -163,7 +163,7 @@ public class SchoolCountdown
             System.exit(1);
         }
 
-        //timed update
+        // timed update
         for(;;)
         {
             try
@@ -183,7 +183,7 @@ public class SchoolCountdown
                 statementEnd.setText( statements[1] );
                 icon.setToolTip( statements[2] );
 
-                Thread.sleep((int)(1*1000)); //update every 1 second
+                Thread.sleep((int)(1*1000)); // update every 1 second
             }
             catch (InterruptedException e)
             {
@@ -210,6 +210,7 @@ public class SchoolCountdown
             return remainingVals;
     }
     
+    // this is truly a mess... need to clean it up and make it more elegant
     public static String[] generateMessages( Holiday earliest , Holiday summer )
     {
 		int[] untilClosest = timeRemaining( new GregorianCalendar() , earliest.date );
@@ -237,7 +238,7 @@ public class SchoolCountdown
     }
 	public static String[] generateMessages( ArrayList<Holiday> holidays )
 	{
-		if( holidays.get(0).equals(holidays.get(holidays.size()-1) ) )
+		if( holidays.get(0).equals(holidays.get(holidays.size()-1) ) ) // if earliest holiday is summer break, do some other stuff
 		{
 			return generateSummerMessageOnly( holidays.get(holidays.size()-1) );
 		}
