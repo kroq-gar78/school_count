@@ -110,7 +110,7 @@ public class SchoolCountdown
         {
             public void actionPerformed( ActionEvent e )
             {
-                System.exit( 0 );
+                System.exit(0);
             }
         };
         ActionListener timerListener = new ActionListener()
@@ -170,7 +170,7 @@ public class SchoolCountdown
                 if( new GregorianCalendar().after( Holiday.schoolEnd.date ) ) //if after school is over, open popup and close
                 {
                     JOptionPane.showMessageDialog( null , "HAPPY SUMMER!!!!!!" , "School Countdown Timer Notification" , JOptionPane.INFORMATION_MESSAGE );
-                    System.exit( 0 );
+                    System.exit(0);
                 }
                 while( new GregorianCalendar().after( holidays.get(0).date ) ) // check if closest one has passed already; if it has, remove it from the list
                 {
@@ -180,7 +180,6 @@ public class SchoolCountdown
                 String[] statements = generateMessages( holidays );
                 statementClosest.setText( statements[0] );
                 statementEnd.setText( statements[1] );
-                
                 icon.setToolTip( statements[2] );
 
                 Thread.sleep((int) (1*(1000))); //update every 1 second
