@@ -161,7 +161,7 @@ public class SchoolCountdown
             System.exit(1);
         }
 
-        // timed update
+        // timed update loop
         for(;;)
         {
             try
@@ -181,7 +181,7 @@ public class SchoolCountdown
                 statementEnd.setText( statements[1] );
                 icon.setToolTip( statements[2] );
 
-                Thread.sleep((int)(1*1000)); // update every 1 second
+                Thread.sleep(1*1000); // update every 1 second
             }
             catch (InterruptedException e)
             {
