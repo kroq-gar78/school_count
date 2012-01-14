@@ -37,7 +37,7 @@ public class SchoolCountdown
     private static JLabel statementEnd;
     private static JLabel statementClosest;
     public static final long millisToSec = (long)(1000); // number of milliseconds in a seconds
-    public static final int hoursToSec = 60*60; //num of seconds in an hour
+    public static final int hoursToSec = 60*60; // num of seconds in an hour
 	
     /**
      * The main execution sequence and loop
@@ -48,7 +48,7 @@ public class SchoolCountdown
     {
     	ArrayList<Holiday> holidays = new ArrayList<Holiday>(java.util.Arrays.asList(Holiday.values()));
 		
-        java.util.Collections.sort( holidays ); //sort in chronological order
+        java.util.Collections.sort( holidays ); // sort in chronological order
         
         //print array for confirmation
         /*for( int i = 0; i < holidays.length; i++ )
@@ -56,18 +56,18 @@ public class SchoolCountdown
 			System.out.println( holidays[i].name );
 		}*/
         
-        if( new GregorianCalendar().after( Holiday.schoolEnd.date ) ) //if after school is over, open popup and close
+        if( new GregorianCalendar().after( Holiday.schoolEnd.date ) ) // if after school is over, open popup and close
         {
             JOptionPane.showMessageDialog( null , "HAPPY SUMMER!!!!!!" , "School Countdown Timer Notification" , JOptionPane.INFORMATION_MESSAGE );
             System.exit(0);
         }
-        if( !SystemTray.isSupported() ) //exit if the system tray isn't supported
+        if( !SystemTray.isSupported() ) // exit if the system tray isn't supported
         {
             JOptionPane.showMessageDialog( null , "This system does not support the tray icon feature. Terminating now." , "School Countdown: Error" , JOptionPane.ERROR_MESSAGE );
             System.exit(0);
         }
         
-        //setup procedure - JPanel displays
+        // setup procedure - JPanel displays
         statementClosest = new JLabel();
         statementEnd = new JLabel();
         timerDisplay = new JPanel();
@@ -75,7 +75,7 @@ public class SchoolCountdown
         timerDisplay.add( statementClosest );
         timerDisplay.add( statementEnd );
 		
-		//set look and feel to system for better integration into the desktop
+		// set look and feel to system for better integration into the desktop
 		try
 		{
 			UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
@@ -87,23 +87,23 @@ public class SchoolCountdown
 			e.printStackTrace();
 			JOptionPane.showMessageDialog( null , "School Countdown Timer failed to retrieve the system look and feel. Falling back to default look and feel." , "Warning" , JOptionPane.WARNING_MESSAGE );
 		}
-        //setup procedure - Tray Icon
+        // setup procedure - Tray Icon
         System.out.println( "Running..." );
-        SystemTray tray = SystemTray.getSystemTray(); //retrieve instance
+        SystemTray tray = SystemTray.getSystemTray(); // retrieve instance
         BufferedImage img = null;
         URL imgURL = null;
         
         try
         {
-			imgURL = new SchoolCountdown().getClass().getResource(iconName); //gets the URL for the image, regardless of JAR or not
+			imgURL = new SchoolCountdown().getClass().getResource(iconName); // gets the URL for the image, regardless of JAR or not
 			img = ImageIO.read(imgURL);
 		}
-		catch( Exception e ) //usually MalformedURLException
+		catch( Exception e ) // usually MalformedURLException
 		{
 			e.printStackTrace();
 			JOptionPane.showMessageDialog( null , "School Countdown Timer encountered an error while\ntrying to load the icon. Terminating now." , "Error" , JOptionPane.ERROR_MESSAGE );
 			System.err.println( "Error loading icon. Now exiting..." );
-			System.exit(1); //exit with error code
+			System.exit(1); // exit with error code
 		}
 		
         ActionListener exitListener = new ActionListener()
@@ -120,7 +120,7 @@ public class SchoolCountdown
                 JOptionPane.showMessageDialog( null , timerDisplay , "School Countdown Timer notification" , JOptionPane.INFORMATION_MESSAGE );
             }
         };
-        //create Popup menu
+        // create Popup menu
         PopupMenu menu = new PopupMenu();
         MenuItem timerItem = new MenuItem( "Timer" ); timerItem.addActionListener( timerListener ); //create "info' meun item
         MenuItem exitItem = new MenuItem( "Exit" ); exitItem.addActionListener( exitListener ); //create "exit" menu item
@@ -128,7 +128,7 @@ public class SchoolCountdown
         menu.addSeparator();
         menu.add( exitItem );
         TrayIcon icon = new TrayIcon( img , "Error: failed to load holidays" , menu ); //instantiate tray icon with a default message as failure
-        icon.setImageAutoSize(true); //auto-resize icon for computer
+        icon.setImageAutoSize(true); // auto-resize icon for computer
         icon.addMouseListener
         (
                 new MouseListener()
@@ -167,7 +167,7 @@ public class SchoolCountdown
         {
             try
             {
-                if( new GregorianCalendar().after( Holiday.schoolEnd.date ) ) //if after school is over, open popup and close
+                if( new GregorianCalendar().after( Holiday.schoolEnd.date ) ) // if after school is over, open popup and close
                 {
                     JOptionPane.showMessageDialog( null , "HAPPY SUMMER!!!!!!" , "School Countdown Timer Notification" , JOptionPane.INFORMATION_MESSAGE );
                     System.exit(0);
@@ -193,18 +193,18 @@ public class SchoolCountdown
     
     public static int[] timeRemaining( GregorianCalendar start , GregorianCalendar end )
     {
-            int[] remainingVals = new int[4]; //days, hours, minutes, seconds; array to return
+            int[] remainingVals = new int[4]; // days, hours, minutes, seconds; array to return
             //weeks?
 
             int seconds = (int)((end.getTimeInMillis() - start.getTimeInMillis())/millisToSec); //seconds remaining
 
-            remainingVals[0] = seconds/(24*hoursToSec); //days
+            remainingVals[0] = seconds/(24*hoursToSec); // days
             seconds %= (24*hoursToSec);
-            remainingVals[1] = seconds/hoursToSec; //hours
+            remainingVals[1] = seconds/hoursToSec; // hours
             seconds %= hoursToSec;
-            remainingVals[2] = seconds/60; //minutes
+            remainingVals[2] = seconds/60; // minutes
             seconds %= 60;
-            remainingVals[3] = seconds; //seconds
+            remainingVals[3] = seconds; // seconds
 
             return remainingVals;
     }
@@ -217,8 +217,8 @@ public class SchoolCountdown
         
 		String earliestMsg = "Only " + untilClosest[0] + " day" + (untilClosest[0]==1 ? "": "s" ) + ", " + untilClosest[1] + " hour" + (untilClosest[1]==1 ? "": "s" ) + ", " + untilClosest[2] + " minute" + (untilClosest[2]==1 ? "": "s" ) + ", and " + untilClosest[3] + " second" + (untilClosest[3]==1 ? "": "s" ) + " until " + earliest.name + " and";
 		
-		//do rounding, choose which day to count to, and set tooltip at same time!
-		String tooltip = tooltip = ( (untilSummer[0] <= 90 ? (String)(summerResults[2]) : (( untilClosest[1] > 12 ? untilClosest[0]+1: untilClosest[0]) + " day" + (untilClosest[0]==1 ? "":"s" ) + " until the closest holiday!" )  ) );
+		// do rounding, choose which day to count to, and set tooltip at same time!
+		String tooltip = ( (untilSummer[0] <= 90 ? (String)(summerResults[2]) : (( untilClosest[1] > 12 ? untilClosest[0]+1: untilClosest[0]) + " day" + (untilClosest[0]==1 ? "":"s" ) + " until the closest holiday!" )  ) );
 		
 		return new String[]{ earliestMsg , (String)(summerResults[0]) , tooltip }; //messages[0],messages[1]=timer text; messages[2]=tooltip
 	}
