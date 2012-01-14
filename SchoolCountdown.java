@@ -80,6 +80,7 @@ public class SchoolCountdown
 		{
 			UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
 			System.out.println( "Using look and feel " + UIManager.getSystemLookAndFeelClassName() );
+			// ^^^ remove this line before merge into master ^^^
 		}
 		catch( Exception e )
 		{
