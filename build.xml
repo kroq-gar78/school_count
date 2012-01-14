@@ -24,6 +24,7 @@
 			</manifest>
 			<fileset dir="." includes="schoolCountdown.gif" />
 		</jar>
+		<chmod file="${jar.dir}/${ant.project.name}.jar" perm="755"/>
 	</target>
 	
 	<target name="run" depends="jar">
