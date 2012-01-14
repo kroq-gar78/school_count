@@ -4,6 +4,7 @@
 	<property name="build.dir" value="build" />
 	<property name="classes.dir" value="${build.dir}/classes" />
 	<property name="jar.dir" value="${build.dir}" />
+	<property name="jar.name" value="${jar.dir}/${ant.project.name}.jar" />
 	
 	<target name="clean">
 		<delete dir="${build.dir}" />
@@ -16,7 +17,7 @@
 	
 	<target name="jar" depends="compile">
 		<mkdir dir="${jar.dir}" />
-		<jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
+		<jar destfile="${jar.name}" basedir="${classes.dir}">
 			<manifest>
 				<attribute name="Main-Class" value="SchoolCountdown" />
 				<attribute name="Specification-Title" value="School Countdown Timer" />
@@ -24,11 +25,11 @@
 			</manifest>
 			<fileset dir="." includes="schoolCountdown.gif" />
 		</jar>
-		<chmod file="${jar.dir}/${ant.project.name}.jar" perm="755"/>
+		<chmod file="${jar.name}" perm="755"/>
 	</target>
 	
 	<target name="run" depends="jar">
-		<java jar="${jar.dir}/${ant.project.name}.jar" fork="true"/>
+		<java jar="${jar.name}" fork="true"/>
 	</target>
 	
 	<target name="build" depends="clean,compile,jar" />
