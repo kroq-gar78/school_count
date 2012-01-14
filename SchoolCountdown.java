@@ -153,7 +153,7 @@ public class SchoolCountdown
         try
         {
             tray.add(icon);
-            icon.displayMessage( "Welcome" , "Welcome to School Countdown Timer" , TrayIcon.MessageType.NONE );
+            icon.displayMessage( "Welcome!" , "Welcome to School Countdown Timer" , TrayIcon.MessageType.NONE );
         }
         catch( AWTException e )
         {
