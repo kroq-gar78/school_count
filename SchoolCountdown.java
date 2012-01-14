@@ -79,7 +79,7 @@ public class SchoolCountdown
 		try
 		{
 			UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
-			System.out.println( UIManager.getSystemLookAndFeelClassName() );
+			System.out.println( "Using look and feel " + UIManager.getSystemLookAndFeelClassName() );
 		}
 		catch( Exception e )
 		{
@@ -167,7 +167,7 @@ public class SchoolCountdown
         {
             try
             {
-                if( new GregorianCalendar().after( Holiday.schoolEnd ) ) //if after school is over, open popup and close
+                if( new GregorianCalendar().after( Holiday.schoolEnd.date ) ) //if after school is over, open popup and close
                 {
                     JOptionPane.showMessageDialog( null , "HAPPY SUMMER!!!!!!" , "School Countdown Timer Notification" , JOptionPane.INFORMATION_MESSAGE );
                     System.exit( 0 );

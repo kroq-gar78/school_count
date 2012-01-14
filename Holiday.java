@@ -4,7 +4,7 @@ import java.util.GregorianCalendar;
 
 public enum Holiday implements Comparable<Holiday>
 {
-	// all of the holidays; might turn into an enum later
+	// all of the holidays
 	laborDay  ( new GregorianCalendar( 2011, GregorianCalendar.SEPTEMBER , 2 , 15 , 30 ) , "Labor Day" ),
     fallHoliday  ( new GregorianCalendar( 2011, GregorianCalendar.OCTOBER , 20 , 15 , 30 ) , "the Fall holiday" ), //October 21 and 24, 2011 holidays, weekend starts October 20, 2011, 3:30 P.M.
     thanksgivingBreak  ( new GregorianCalendar( 2011, GregorianCalendar.NOVEMBER , 22 , 15 , 30 ) , "Thanksgiving Break" ), //Thanksgiving 2011; holiday starts November 22, 2011, 3:30 P.M.
