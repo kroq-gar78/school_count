@@ -34,8 +34,6 @@ public class SchoolCountdown
 {
     public static final String iconName = "schoolCountdown.gif";
     private static JPanel timerDisplay;
-    private static JLabel statementEnd;
-    private static JLabel statementClosest;
     public static final long millisToSec = (long)(1000); // number of milliseconds in a seconds
     public static final int hoursToSec = 60*60; // num of seconds in an hour
 	
@@ -68,8 +66,8 @@ public class SchoolCountdown
         }
         
         // setup procedure - JPanel displays
-        statementClosest = new JLabel();
-        statementEnd = new JLabel();
+        JLabel statementClosest = new JLabel();
+        JLabel statementEnd = new JLabel();
         timerDisplay = new JPanel();
         timerDisplay.setLayout( new GridLayout(2,1) );
         timerDisplay.add( statementClosest );
