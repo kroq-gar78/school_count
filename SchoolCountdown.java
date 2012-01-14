@@ -182,7 +182,7 @@ public class SchoolCountdown
                 statementEnd.setText( statements[1] );
                 icon.setToolTip( statements[2] );
 
-                Thread.sleep((int) (1*(1000))); //update every 1 second
+                Thread.sleep((int)(1*1000)); //update every 1 second
             }
             catch (InterruptedException e)
             {
