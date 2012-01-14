@@ -198,11 +198,11 @@ public class SchoolCountdown
             int seconds = (int)((end.getTimeInMillis() - start.getTimeInMillis())/millisToSec); //seconds remaining
 
             remainingVals[0] = seconds/(24*hoursToSec); // days
-            seconds %= (24*hoursToSec);
+            seconds %= (24*hoursToSec); // remove days from second count
             remainingVals[1] = seconds/hoursToSec; // hours
-            seconds %= hoursToSec;
+            seconds %= hoursToSec; // remove hours from second count
             remainingVals[2] = seconds/60; // minutes
-            seconds %= 60;
+            seconds %= 60; // remove minutes from second count
             remainingVals[3] = seconds; // seconds
 
             return remainingVals;
