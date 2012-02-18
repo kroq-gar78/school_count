@@ -47,7 +47,7 @@ public class SchoolCountdown
 		winterBreak  ( new GregorianCalendar( 2011, GregorianCalendar.DECEMBER , 18 , 12 , 40 ) , "Winter break" ),
 		mlkDay  ( new GregorianCalendar( 2012 , GregorianCalendar.JANUARY , 13 , 15 , 30 ) , "MLK Day" ),
 		presDay  ( new GregorianCalendar( 2012 , GregorianCalendar.FEBRUARY , 17 , 15 , 30 ) , "President's Day" ),
-		springBreak  ( new GregorianCalendar( 2012 , GregorianCalendar.MARCH , 9 , 15 , 30 ) , "Spring Break" ),
+		springBreak  ( new GregorianCalendar( 2012 , GregorianCalendar.FEBRUARY , 19 , 15 , 30 ) , "Spring Break" ),
 		springHoliday  ( new GregorianCalendar( 2012 , GregorianCalendar.APRIL , 5 , 15 , 30) , "the Spring holiday" ),
 		memorialDay  ( new GregorianCalendar( 2012 , GregorianCalendar.MAY , 25 , 15 , 30 ) , "Memorial Day" ),
 		schoolEnd  ( new GregorianCalendar( 2012 , GregorianCalendar.JUNE , 1 , 12 , 40 ) , "Summer Break" );
@@ -74,9 +74,9 @@ public class SchoolCountdown
         java.util.Collections.sort( holidays ); // sort in chronological order
         
         //print array for confirmation
-        /*for( int i = 0; i < holidays.length; i++ )
+        /*for( int i = 0; i < holidays.size(); i++ )
         {
-			System.out.println( holidays[i].name );
+			System.out.println( holidays.get(i).name );
 		}*/
         
         if( new GregorianCalendar().after( Holiday.schoolEnd.date ) ) // if after school is over, open popup and close
@@ -236,9 +236,9 @@ public class SchoolCountdown
         
 		String earliestMsg = "Only " + untilClosest[0] + " day" + (untilClosest[0]==1 ? "": "s" ) + ", " + untilClosest[1] + " hour" + (untilClosest[1]==1 ? "": "s" ) + ", " + untilClosest[2] + " minute" + (untilClosest[2]==1 ? "": "s" ) + ", and " + untilClosest[3] + " second" + (untilClosest[3]==1 ? "": "s" ) + " until " + earliest.name + " and";
 		
-		String tooltip;
+		String tooltip = "";
 		// do rounding, choose which day to count to, and set tooltip at same time!
-		if( untilSummer[0] <= 90 ) { tooltip = (untilClosest[1] > 12 ? untilClosest[0]+1: untilClosest[0]) + " day" + (untilClosest[0]==1 ? "":"s" ) + " until the closest holiday!"; }
+		if( untilSummer[0] > 90 ) { tooltip = (untilClosest[1] > 12 ? untilClosest[0]+1: untilClosest[0]) + " day" + (untilClosest[0]==1 ? "":"s" ) + " until the closest holiday!"; }
 		else { tooltip = (String)summerResults[2]; }
 		
 		return new String[]{ earliestMsg , (String)(summerResults[0]) , tooltip }; //messages[0],messages[1]=timer text; messages[2]=tooltip
