@@ -189,29 +189,23 @@ public class SchoolCountdown
         // timed update loop
         for(;;)
         {
-            try
-            {
-                if( new GregorianCalendar().after( Holiday.schoolEnd.date ) ) // if after school is over, open popup and close
-                {
-                    JOptionPane.showMessageDialog( null , "HAPPY SUMMER!!!!!!" , "School Countdown Timer Notification" , JOptionPane.INFORMATION_MESSAGE );
-                    System.exit(0);
-                }
-                while( new GregorianCalendar().after( holidays.get(0).date ) ) // check if closest one has passed already; if it has, remove it from the list
-                {
-					holidays.remove(0);
-				}
-				
-                String[] statements = generateMessages( holidays );
-                statementClosest.setText( statements[0] );
-                statementEnd.setText( statements[1] );
-                icon.setToolTip( statements[2] );
-
-                Thread.sleep(1*1000); // update every 1 second
-            }
-            catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
+			if( new GregorianCalendar().after( Holiday.schoolEnd.date ) ) // if after school is over, open popup and close
+			{
+				JOptionPane.showMessageDialog( null , "HAPPY SUMMER!!!!!!" , "School Countdown Timer Notification" , JOptionPane.INFORMATION_MESSAGE );
+				System.exit(0);
+			}
+			while( new GregorianCalendar().after( holidays.get(0).date ) ) // check if closest one has passed already; if it has, remove it from the list
+			{
+				holidays.remove(0);
+			}
+			
+			String[] statements = generateMessages( holidays );
+			statementClosest.setText( statements[0] );
+			statementEnd.setText( statements[1] );
+			icon.setToolTip( statements[2] );
+			
+            try { Thread.sleep(1*1000); } // update every 1 second 
+            catch (InterruptedException e) { e.printStackTrace(); }
         }
     }
     
@@ -261,7 +255,7 @@ public class SchoolCountdown
     }
 	public static String[] generateMessages( ArrayList<Holiday> holidays )
 	{
-		if( holidays.get(0).equals(holidays.get(holidays.size()-1) ) ) // if earliest holiday is summer break, do some other stuff
+		if( holidays.get(0).equals(Holiday.schoolEnd) ) // if earliest holiday is summer break, follow other logic path
 		{
 			return generateSummerMessageOnly( holidays.get(holidays.size()-1) );
 		}
