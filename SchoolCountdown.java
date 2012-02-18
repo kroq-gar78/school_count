@@ -47,7 +47,7 @@ public class SchoolCountdown
 		winterBreak  ( new GregorianCalendar( 2011, GregorianCalendar.DECEMBER , 18 , 12 , 40 ) , "Winter break" ),
 		mlkDay  ( new GregorianCalendar( 2012 , GregorianCalendar.JANUARY , 13 , 15 , 30 ) , "MLK Day" ),
 		presDay  ( new GregorianCalendar( 2012 , GregorianCalendar.FEBRUARY , 17 , 15 , 30 ) , "President's Day" ),
-		springBreak  ( new GregorianCalendar( 2012 , GregorianCalendar.FEBRUARY , 19 , 15 , 30 ) , "Spring Break" ),
+		springBreak  ( new GregorianCalendar( 2012 , GregorianCalendar.MARCH , 9 , 15 , 30 ) , "Spring Break" ),
 		springHoliday  ( new GregorianCalendar( 2012 , GregorianCalendar.APRIL , 5 , 15 , 30) , "the Spring holiday" ),
 		memorialDay  ( new GregorianCalendar( 2012 , GregorianCalendar.MAY , 25 , 15 , 30 ) , "Memorial Day" ),
 		schoolEnd  ( new GregorianCalendar( 2012 , GregorianCalendar.JUNE , 1 , 12 , 40 ) , "Summer Break" );
