@@ -236,10 +236,10 @@ public class SchoolCountdown
         
 		String earliestMsg = "Only " + untilClosest[0] + " day" + (untilClosest[0]==1 ? "": "s" ) + ", " + untilClosest[1] + " hour" + (untilClosest[1]==1 ? "": "s" ) + ", " + untilClosest[2] + " minute" + (untilClosest[2]==1 ? "": "s" ) + ", and " + untilClosest[3] + " second" + (untilClosest[3]==1 ? "": "s" ) + " until " + earliest.name + " and";
 		
+		String tooltip;
 		// do rounding, choose which day to count to, and set tooltip at same time!
-		if( untilSummer[0] <= 90 )
-			String tooltip = ( untilClosest[1] > 12 ? untilClosest[0]+1: untilClosest[0]) + " day" + (untilClosest[0]==1 ? "":"s" ) + " until the closest holiday!";
-		else String tooltip = (String)summerResults[2];
+		if( untilSummer[0] <= 90 ) { tooltip = (untilClosest[1] > 12 ? untilClosest[0]+1: untilClosest[0]) + " day" + (untilClosest[0]==1 ? "":"s" ) + " until the closest holiday!"; }
+		else { tooltip = (String)summerResults[2]; }
 		
 		return new String[]{ earliestMsg , (String)(summerResults[0]) , tooltip }; //messages[0],messages[1]=timer text; messages[2]=tooltip
 	}
